@@ -73,14 +73,22 @@ export async function POST(request) {
 export async function GET() {
   await dbConnect();
 
-  const allDoctors = await Doctors.find({});
-
-  return NextResponse.json(
-    {
-      success: true,
-      message: "All Doctors Data Fetched Successfully",
-      allDoctors,
-    },
-    { status: 201 }
-  );
+  try {
+    const allDoctors = await Doctors.find({});
+  
+    if(!allDoctors){
+      return NextResponse.json(
+        { error: "Somthing Went Wrong While Fetching Data" },
+        { status: 400 }
+      );
+    }
+  
+    return NextResponse.json(allDoctors);
+  } catch (error) {
+    console.error("API GET /doctor error:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
