@@ -1,27 +1,31 @@
 import Image from "next/image";
 
 export default function Doctor() {
-    return (
-      <div className="flex justify-center w-full h-fit border p-10 ">
-        <div className="flex gap-10">
+  return (
+    <div className="flex justify-center w-fit h-fit border p-5 rounded-xl">
+      <div className="flex ">
         <Image
-            src="/apollo247.svg"
-            alt="Description"
-            width={60}
-            height={46}
-          />
+          className="pr-5 w-fit"
+          src="/apollo247.svg"
+          alt="Description"
+          width={60}
+          height={46}
+        />
 
-          <div>
-            <p>Dr.sddfjoiweut90rw</p>
+        <div className="flex gap-40">
+          <div className="flex flex-col justify-start">
+            <p className="font-bold text-xl">Dr.sddfjoiweut90rw</p>
             <p>Experience</p>
             <p>Hospital</p>
           </div>
-          <div>
-            <h5>500Rs</h5>
-          <button className="border p-5 cursor-pointer">Consult</button>
+          <div className="flex flex-col justify-center items-center">
+            <h5 className="font-bold text-l">₹500</h5>
+            <button className="border p-2 cursor-pointer px-28 rounded-xl text-[#106C89] font-bold">
+              Consult Online
+            </button>
           </div>
         </div>
       </div>
-    );
-  }
-  
+    </div>
+  );
+}

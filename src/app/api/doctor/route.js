@@ -29,7 +29,6 @@ export async function POST(request) {
       !doctorName ||
       !experience ||
       !fees ||
-      !hospitalVisit ||
       !hospitalName ||
       !avatar ||
       !language
