@@ -11,10 +11,7 @@ export default function Home() {
   useEffect(() => {
     const doctorsData = async () => {
       try {
-        const res = await fetch("/api/doctor", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
+        const res = await fetch("/api/doctor");
         const data = await res.json();
 
         if (!res.ok) {
