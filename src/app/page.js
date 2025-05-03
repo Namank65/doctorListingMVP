@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     const doctorsData = async () => {
       try {
-        const res = await fetch("/api/doctor");
+        const res = await fetch("https://doctor-listing-mvp-hon7.vercel.app/api/doctor");
         const data = await res.json();
 
         if (!res.ok) {
