@@ -16,14 +16,15 @@ export async function POST(request) {
       language,
     } = body;
 
-    console.log(doctorName,
-        experience,
-        fees,
-        hospitalVisit,
-        hospitalName,
-        avatar,
-        language,);
-         
+    console.log(
+      doctorName,
+      experience,
+      fees,
+      hospitalVisit,
+      hospitalName,
+      avatar,
+      language
+    );
 
     if (
       !doctorName ||
@@ -60,15 +61,26 @@ export async function POST(request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, error: "Something Went Wrong During Adding new Doctor" },
+      {
+        success: false,
+        error: "Something Went Wrong During Adding new Doctor",
+      },
       { status: 500 }
     );
   }
 }
 
-export async function GET(request) {
-  const searchParams = request.nextUrl.searchParams;
-  const name = searchParams.get("name");
+export async function GET() {
+  await dbConnect();
 
-  return Response.json({ message: `Doctor name is ${name}`});
+  const allDoctors = await Doctors.find({});
+
+  return NextResponse.json(
+    {
+      success: true,
+      message: "All Doctors Data Fetched Successfully",
+      allDoctors,
+    },
+    { status: 201 }
+  );
 }
