@@ -71,7 +71,15 @@ export async function POST(request) {
 }
 
 export async function GET() {
-  await dbConnect();
+  const db = await dbConnect();
+
+  if (db) {
+    console.log("db connected from controller");
+    
+  }else{
+    console.log("yahi pe dikkat hai");
+
+  }
 
   try {
     const allDoctors = await Doctors.find({});
