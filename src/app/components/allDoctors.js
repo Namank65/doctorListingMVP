@@ -21,7 +21,7 @@ export default function Doctor({ doctor }) {
           </div>
           <div className="flex flex-col justify-center items-center">
             <h5 className="font-bold text-l">₹{doctor?.fees}</h5>
-            <button className="border p-2 cursor-pointer px-28 rounded-xl text-[#106C89] font-bold">
+            <button className="border p-2 hover:text-[#415c65] cursor-pointer px-28 rounded-xl text-[#106C89] font-bold">
               Consult Online
             </button>
           </div>

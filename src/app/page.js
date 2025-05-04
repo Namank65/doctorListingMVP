@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Home() {
-  const [doctors, setDoctors] = useState();
+  const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
     const doctorsData = async () => {
@@ -18,7 +18,7 @@ export default function Home() {
           toast.error(data.error || "Something went wrong");
         } else {
           toast.success("All Doctors Data Fetched Successfully");
-          setDoctors(data.allDoctors);
+          setDoctors(data);
         }
       } catch (error) {
         toast.error("Server error");
@@ -28,6 +28,7 @@ export default function Home() {
 
     doctorsData();
   }, []);
+  
 
   return (
     <div className="flex justify-center w-fit h-full flex-col overflow-y-scroll px-5 gap-5 ">
