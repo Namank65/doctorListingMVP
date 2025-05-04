@@ -71,26 +71,18 @@ export async function POST(request) {
 }
 
 export async function GET() {
-  const db = await dbConnect();
-
-  if (db) {
-    console.log("db connected from controller");
-    
-  }else{
-    console.log("yahi pe dikkat hai");
-
-  }
+  await dbConnect();
 
   try {
     const allDoctors = await Doctors.find({});
-  
-    if(!allDoctors){
+
+    if (!allDoctors) {
       return NextResponse.json(
         { error: "Somthing Went Wrong While Fetching Data" },
         { status: 400 }
       );
     }
-  
+
     return NextResponse.json(allDoctors);
   } catch (error) {
     console.error("API GET /doctor error:", error);

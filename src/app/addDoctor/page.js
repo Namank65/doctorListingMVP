@@ -54,7 +54,7 @@ const AddDoctorForm = () => {
       <input name="experience" placeholder="Experience" onChange={handleChange} required />
       <input name="fees" placeholder="Fees" type="number" onChange={handleChange} required />
       <input name="hospitalName" placeholder="Hospital Name" onChange={handleChange} required />
-      <input name="avatar" placeholder="Image URL" onChange={handleChange} required />
+      <input name="avatar" placeholder="Image URL (type Any String Here)" onChange={handleChange} required />
       <input name="language" placeholder="Language" onChange={handleChange} required />
       <label>
         <input type="checkbox" name="hospitalVisit" onChange={handleChange} />

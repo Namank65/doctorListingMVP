@@ -16,7 +16,7 @@ export default function Doctor({ doctor }) {
         <div className="flex gap-40">
           <div className="flex flex-col justify-start">
             <p className="font-bold text-xl">{doctor?.doctorName}</p>
-            <p>{doctor?.experience}</p>
+            <p>Experience-{doctor?.experience}Years</p>
             <p>{doctor?.hospitalName}</p>
           </div>
           <div className="flex flex-col justify-center items-center">
