@@ -1,6 +1,6 @@
 export default function SideBar() {
   return (
-    <div className=" bg-gray-100 text-black flex overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
+    <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
       <div className="p-3 w-fit sm:block hidden">
         <div className="flex gap-20 py-3">
           <h1 className="text-lg">Filters</h1>

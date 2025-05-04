@@ -8,7 +8,7 @@ import Image from "next/image";
 const header = () => {
   return (
     <div className="bg-gray-100 z-10 sticky top-0 shadow-xl">
-      <div className="flex flex-row justify-between px-40 py-2 ">
+      <div className="flex flex-row justify-between px-10 md:px-40 py-2">
         <div className="flex flex-row">
           <Image
             src="/apollo247.svg"
@@ -16,7 +16,7 @@ const header = () => {
             width={60}
             height={46}
           />
-          <div className="flex flex-row items-center px-6">
+          <div className="flex flex-row items-center px-6 text-sm md:text-l">
             <GrLocation className="text-2xl"/>
             <div className="px-2">
               <p className="text-xs">Select location</p>
@@ -29,18 +29,18 @@ const header = () => {
           <input
             type="text"
             placeholder="Search Doctors, Specialities, Conditions etc."
-            className=" h-8 p-2 px-5 w-xl focus:outline-none focus:ring-0 "
+            className=" h-8 p-2 px-5 w-10 md:w-xl focus:outline-none focus:ring-0"
           />
         </div>
 
         <div className="flex items-center border rounded-xl px-4 font-medium text-[#106C89] gap-3">
-        <button className="cursor-pointer">
+        <button className="cursor-pointer md:block hidden">
           Login
         </button>
         <FaRegCircleUser className="text-2xl" />
         </div>
       </div>
-      <div className="h-12  w-full border-t-1 flex items-center justify-center ">
+      <div className="h-12  w-full border-t-1 md:flex items-center justify-center hidden">
         <ul className="flex flex-row gap-10 font-medium cursor-pointer">
           <li className="hover:text-[#106C89] hover:underline">Buy Medicines</li>
           <li className="hover:text-[#106C89] hover:underline">Find Doctors</li>

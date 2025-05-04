@@ -49,13 +49,13 @@ const AddDoctorForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 py-10 items-center w-full">
-      <input name="doctorName" className='border rounded' placeholder="Doctor Name" onChange={handleChange} required />
-      <input name="experience" placeholder="Experience" onChange={handleChange} required />
-      <input name="fees" placeholder="Fees" type="number" onChange={handleChange} required />
-      <input name="hospitalName" placeholder="Hospital Name" onChange={handleChange} required />
-      <input name="avatar" placeholder="Image URL (type Any String Here)" onChange={handleChange} required />
-      <input name="language" placeholder="Language" onChange={handleChange} required />
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 px-4 py-10 items-center w-full">
+      <input name="doctorName" className='border w-6/12 p-2  rounded' placeholder="Doctor Name" onChange={handleChange} required />
+      <input name="experience" className='border w-6/12 p-2  rounded' placeholder="Experience" onChange={handleChange} required />
+      <input name="fees" className='border w-6/12 p-2  rounded' placeholder="Fees" type="number" onChange={handleChange} required />
+      <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
+      <input name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
+      <input name="language" className='border w-6/12 p-2  rounded' placeholder="Language" onChange={handleChange} required />
       <label>
         <input type="checkbox" name="hospitalVisit" onChange={handleChange} />
         Hospital Visit
