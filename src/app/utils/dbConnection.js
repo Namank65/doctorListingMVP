@@ -17,7 +17,7 @@ export async function dbConnect() {
             maxPoolSize: 10
         }
 
-        cached.promise = mongoose
+        cached.promise = await mongoose
         .connect(MONGO_DB_URL, opts)
         .then(() => mongoose.connection)
     }
@@ -26,8 +26,8 @@ export async function dbConnect() {
         cached.conn = await cached.promise
     } catch (error) {
         cached.promise = null
-        return error
         console.log("123"+ error );
+        return error
     }
 console.log("db connected");
 
