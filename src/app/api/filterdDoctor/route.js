@@ -1,4 +1,5 @@
 import { dbConnect } from "@/app/utils/dbConnection";
+import { Doctors } from "@/models/doctors.model";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -15,9 +16,7 @@ export async function GET(request) {
   const limit = Number(process.env.DOCTOR_PER_PAGE_LIMIT) || 10;
   const skip = (page - 1) * limit;
 
-  const baseQuery = {
-    language: language,
-  };
+  const baseQuery = {};
 
   if (doctorName) {
     baseQuery.doctorName = {
@@ -28,7 +27,7 @@ export async function GET(request) {
   if (fees) {
     baseQuery.fees = {
       $gte: Number(fees),
-    };
+    }
   }
   if (experience) {
     baseQuery.experience = {
@@ -63,9 +62,12 @@ export async function GET(request) {
     }
 
     return NextResponse.json(
-      { error: "Somthing Went Wrong While Fetching Data" },
-      { status: 400 },
-      { allDoctors, totalPage }
+      {
+        success: "Filtered Data Fetched Successfully",
+        allDoctors,
+        totalPage,
+      },
+      { status: 201 }
     );
   } catch (error) {
     console.error("API GET /doctor error:", error);
