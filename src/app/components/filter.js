@@ -1,4 +1,27 @@
+"use client"
+import { useState } from "react";
+
 export default function SideBar() {
+
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
+
+  const handleCheckboxChange = (e) => {
+    const isChecked = e.target.checked;
+    const inputName = e.target.name;
+console.log(inputName);
+
+    if (isChecked && inputName === "oneToFive") {
+      setPriceRange({ min: 100, max: 500 }); // your desired range
+    } 
+
+    if (isChecked && inputName === "FiveToOneK") {
+      setPriceRange({ min: 500, max: 1000 }); // your desired range
+    } 
+    
+  };
+  console.log(priceRange.min);
+
+
   return (
     <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
       <div className="p-3 w-fit sm:block hidden">
@@ -46,10 +69,10 @@ export default function SideBar() {
           <h2>Fees (In Rupees)</h2>
           <lable className="font-normal">
             <div>
-          <input type="checkbox"/> 100-500
+          <input type="checkbox" name="oneToFive" onChange={handleCheckboxChange}/> 100-500
             </div>
             <div>
-          <input type="checkbox"/> 500-1000
+          <input type="checkbox" name="FiveToOneK" onChange={handleCheckboxChange}/> 500-1000
             </div>
             <div>
           <input type="checkbox"/> 1000+
