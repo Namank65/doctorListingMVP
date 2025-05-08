@@ -7,7 +7,8 @@ export async function GET(request) {
 
   const doctorName = searchParams.get("doctorName");
   const experience = searchParams.get("experience");
-  const fees = searchParams.get("fees");
+  const minFees = searchParams.get("minFees");
+  const maxFees = searchParams.get("maxFees");
   const hospitalVisit = searchParams.get("hospitalVisit");
   const hospitalName = searchParams.get("hospitalName");
   const language = searchParams.get("language");
@@ -24,11 +25,28 @@ export async function GET(request) {
       $options: "i",
     };
   }
-  if (fees) {
+  // if (fees) {
+  //   baseQuery.fees = {
+  //     $gte: Number(fees),
+  //   }
+  // }
+
+  if (minFees && maxFees) {
     baseQuery.fees = {
-      $gte: Number(fees),
-    }
+      $gte: Number(minFees),
+      $lte: Number(maxFees),
+    };
+  } else if (maxFees) {
+    baseQuery.fees = {
+      $lte: Number(maxFees),
+    };
+  } else if (minFees) {
+    baseQuery.fees = {
+      $gte: Number(minFees),
+    };
   }
+
+
   if (experience) {
     baseQuery.experience = {
       $gte: Number(experience),

@@ -1,9 +1,27 @@
 "use client"
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SideBar() {
 
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
+
+  const filterHandeler = async () => {
+    try {
+      const res = await fetch("/api/filterdDoctor");
+      const data = await res.json();
+      console.log(data);
+
+      if (!res.ok) {
+        toast.error(data.error || "Something went wrong");
+      } else {
+        toast.success("Filteration");
+      }
+    } catch (error) {
+      toast.error("Server error");
+      console.error(error);
+    }
+  };
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
@@ -16,7 +34,13 @@ console.log(inputName);
 
     if (isChecked && inputName === "FiveToOneK") {
       setPriceRange({ min: 500, max: 1000 }); // your desired range
-    } 
+    }
+
+    if (isChecked && inputName === "OneKPlus") {
+      setPriceRange({ min: 1000, max: 5000 }); // your desired range
+    }
+
+    filterHandeler()
     
   };
   console.log(priceRange.min);
@@ -75,7 +99,7 @@ console.log(inputName);
           <input type="checkbox" name="FiveToOneK" onChange={handleCheckboxChange}/> 500-1000
             </div>
             <div>
-          <input type="checkbox"/> 1000+
+          <input type="checkbox" name="OneKPlus" onChange={handleCheckboxChange}/> 1000+
             </div>
           </lable>
         </div>
