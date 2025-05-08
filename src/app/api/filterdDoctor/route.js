@@ -44,6 +44,11 @@ export async function GET(request) {
     baseQuery.fees = {
       $gte: Number(minFees),
     };
+  }else{
+    return NextResponse.json(
+      { error: "No Doctor Found" },
+      { status: 400 }
+    );
   }
 
 
@@ -74,7 +79,7 @@ export async function GET(request) {
 
     if (!allDoctors || !totalPage) {
       return NextResponse.json(
-        { error: "Somthing Went Wrong While Fetching Data" },
+        { error: "Sorry No Doctors Found At This Moment" },
         { status: 400 }
       );
     }

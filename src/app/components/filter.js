@@ -1,14 +1,39 @@
 "use client"
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function SideBar() {
 
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
 
+  const handleCheckboxChange = (e) => {
+    const isChecked = e.target.checked;
+    const inputName = e.target.name;
+
+    if (isChecked && inputName === "oneToFive") {
+      setPriceRange({ min: 100, max: 500 }); 
+    }
+
+    if (isChecked && inputName === "FiveToOneK") {
+      setPriceRange({ min: 500, max: 1000 }); 
+    }
+
+    if (isChecked && inputName === "OneKPlus") {
+      setPriceRange({ min: 1000, max: 5000 }); 
+    }
+  };
+  
+  useEffect(() => {
+    if (priceRange.max > 0 && priceRange.min > 0) {
+      filterHandeler()
+    }
+    
+  },[priceRange.min, priceRange.max])
+  
   const filterHandeler = async () => {
     try {
-      const res = await fetch("/api/filterdDoctor");
+      const res = await fetch(`/api/filterdDoctor?minFees=${priceRange?.min}&maxFees=${priceRange?.max}`);
       const data = await res.json();
       console.log(data);
 
@@ -22,29 +47,6 @@ export default function SideBar() {
       console.error(error);
     }
   };
-
-  const handleCheckboxChange = (e) => {
-    const isChecked = e.target.checked;
-    const inputName = e.target.name;
-console.log(inputName);
-
-    if (isChecked && inputName === "oneToFive") {
-      setPriceRange({ min: 100, max: 500 }); // your desired range
-    } 
-
-    if (isChecked && inputName === "FiveToOneK") {
-      setPriceRange({ min: 500, max: 1000 }); // your desired range
-    }
-
-    if (isChecked && inputName === "OneKPlus") {
-      setPriceRange({ min: 1000, max: 5000 }); // your desired range
-    }
-
-    filterHandeler()
-    
-  };
-  console.log(priceRange.min);
-
 
   return (
     <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
