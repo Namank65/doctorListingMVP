@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { context } from "../utils/context";
 
 export default function SideBar() {
 
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
+  const {allDoctorsData, setAllDoctorsData} = context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
@@ -29,12 +31,14 @@ export default function SideBar() {
       filterHandeler()
     }
     
-  },[priceRange.min, priceRange.max])
+  },[priceRange.min, priceRange.max, handleCheckboxChange])
+  
   
   const filterHandeler = async () => {
     try {
       const res = await fetch(`/api/filterdDoctor?minFees=${priceRange?.min}&maxFees=${priceRange?.max}`);
       const data = await res.json();
+      setAllDoctorsData("hi")
       console.log(data);
 
       if (!res.ok) {
