@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { context } from "../utils/context";
+import { Context } from "../utils/context";
 
 export default function SideBar() {
 
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
-  const {allDoctorsData, setAllDoctorsData} = context();
+  const {allDoctorsData, setAllDoctorsData} = Context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;

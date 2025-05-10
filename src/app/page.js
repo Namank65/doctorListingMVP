@@ -4,11 +4,10 @@ import Link from "next/link";
 import Doctor from "./components/allDoctors";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { context } from "./utils/context";
+import { Context } from "./utils/context";
 
 export default function Home() {
-  const [doctors, setDoctors] = useState([]);
-  const {allDoctorsData, setAllDoctorsData} = context();
+  const {allDoctorsData, setAllDoctorsData} = Context();
 
   useEffect(() => {
     const doctorsData = async () => {
@@ -27,8 +26,6 @@ export default function Home() {
         console.error(error);
       }
     };
-    
-    
     doctorsData();
   }, []);
   

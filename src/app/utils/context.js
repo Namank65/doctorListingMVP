@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext,  useContext,  useState } from "react";
 
 const UserContext = createContext();
 
@@ -14,4 +14,4 @@ export function UserProvider({ children }) {
 }
 
 // Optional custom hook
-export const context = () => useContext(UserContext);
+export const Context = () => useContext(UserContext);
