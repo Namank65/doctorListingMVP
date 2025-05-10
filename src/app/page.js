@@ -1,8 +1,7 @@
 "use client";
-
 import Link from "next/link";
 import Doctor from "./components/allDoctors";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Context } from "./utils/context";
 
@@ -28,8 +27,6 @@ export default function Home() {
     };
     doctorsData();
   }, []);
-  
-  console.log(allDoctorsData);
 
   return (
     <div className="flex justify-center w-fit h-full flex-col overflow-y-scroll px-5 gap-5 ">

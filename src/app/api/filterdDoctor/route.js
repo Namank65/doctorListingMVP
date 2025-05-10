@@ -25,11 +25,6 @@ export async function GET(request) {
       $options: "i",
     };
   }
-  // if (fees) {
-  //   baseQuery.fees = {
-  //     $gte: Number(fees),
-  //   }
-  // }
 
   if (minFees && maxFees) {
     baseQuery.fees = {
@@ -44,13 +39,7 @@ export async function GET(request) {
     baseQuery.fees = {
       $gte: Number(minFees),
     };
-  }else{
-    return NextResponse.json(
-      { error: "No Doctor Found" },
-      { status: 400 }
-    );
   }
-
 
   if (experience) {
     baseQuery.experience = {
