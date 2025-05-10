@@ -18,7 +18,7 @@ export default function SideBar() {
     }
 
     if (isChecked && inputName === "FiveToOneK") {
-      setPriceRange({ min: 500, max: 1000 }); 
+      setPriceRange({ min: 500, max: 1000 });
     }
 
     if (isChecked && inputName === "OneKPlus") {
@@ -31,14 +31,14 @@ export default function SideBar() {
       filterHandeler()
     }
     
-  },[priceRange.min, priceRange.max, handleCheckboxChange])
+  },[priceRange])
   
   
   const filterHandeler = async () => {
     try {
       const res = await fetch(`/api/filterdDoctor?minFees=${priceRange?.min}&maxFees=${priceRange?.max}`);
       const data = await res.json();
-      setAllDoctorsData("hi")
+      setAllDoctorsData(data?.allDoctors)
       console.log(data);
 
       if (!res.ok) {

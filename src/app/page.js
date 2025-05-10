@@ -20,7 +20,7 @@ export default function Home() {
           toast.error(data.error || "Something went wrong");
         } else {
           toast.success("All Doctors Data Fetched Successfully");
-          setDoctors(data);
+          setAllDoctorsData(data);
         }
       } catch (error) {
         toast.error("Server error");
@@ -44,7 +44,7 @@ export default function Home() {
           Add New Doctor+
         </button>
       </Link>
-      {doctors?.map((e) => (
+      {allDoctorsData?.map((e) => (
         <Doctor key={e._id} doctor={e} />
       ))}
     </div>
