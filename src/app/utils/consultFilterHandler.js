@@ -1,9 +1,9 @@
 "use client"
 import toast from "react-hot-toast";
 
-export const ConsultFilterHandeler = async (fjg, setAllDoctorsData) => {
+export const ConsultFilterHandeler = async ( setAllDoctorsData, hosVisit) => {
     try {
-      const res = await fetch(`/api/filterdDoctor?hospitalVisit=${fjg}`);
+      const res = await fetch(`/api/filterdDoctor?hospitalVisit=${hosVisit}`);
       const data = await res.json();
       setAllDoctorsData(data?.allDoctors)
       console.log(data);

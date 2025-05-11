@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import { Context } from "../utils/context";
 import { FilterHandeler } from "../utils/feesFilterHandler";
+import { ConsultFilterHandeler } from "../utils/consultFilterHandler";
 
 export default function SideBar() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [hosVisit, setHosVisit] = useState();
+  const [modeOfConsult, setModeOfConsult] = useState("");
   const { setAllDoctorsData } = Context();
 
   const handleCheckboxChange = (e) => {
@@ -23,17 +25,49 @@ export default function SideBar() {
     if (isChecked && inputName === "OneKPlus") {
       setPriceRange({ min: 1000, max: 5000 });
     }
+  };
 
-    if (isChecked && inputName === "hoshosVisit") {
+  const handleModeOfConsult = (e) => {
+    const isChecked = e.target.checked;
+    const inputName = e.target.name;
+    console.log(e.target);
+    
+    if (isChecked) {
+      setModeOfConsult(inputName)
       setHosVisit(true)
     }
+    if (!isChecked) {
+      setModeOfConsult("")
+    }
+
+    // if (isChecked && inputName === "hosVisit") {
+    //   setHosVisit(true)
+    // }
+
+    // if(isChecked && inputName === "onlineConsult"){
+    //   setHosVisit(false)
+    // }
   };
 
   useEffect(() => {
-    if (priceRange.max > 0 && priceRange.min > 0) {
-      FilterHandeler(priceRange, setAllDoctorsData);
-    }
-  }, [priceRange]);
+    const fetchData = async () => {
+      try {
+        if (priceRange.max > 0 && priceRange.min > 0) {
+          await FilterHandeler(priceRange, setAllDoctorsData);
+        }
+        if (modeOfConsult === "onlineConsult" || modeOfConsult === "hosVisit") {
+          console.log(modeOfConsult);
+          
+          await ConsultFilterHandeler(setAllDoctorsData, hosVisit);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, [priceRange, hosVisit]);
+  
 
   return (
     <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
@@ -54,10 +88,10 @@ export default function SideBar() {
             <h2>Mode of Consult</h2>
             <lable className="font-normal">
               <div>
-                <input type="checkbox" name="hosVisit" onChange={handleCheckboxChange} /> Hospital Visit
+                <input type="checkbox" name="hosVisit" checked={modeOfConsult === 'hosVisit'} onChange={handleModeOfConsult} /> Hospital Visit
               </div>
               <div>
-                <input type="checkbox" name="onlineConsult" onChange={handleCheckboxChange} /> Online Consult
+                <input type="checkbox" name="onlineConsult" checked={modeOfConsult === 'onlineConsult'} onChange={handleModeOfConsult} /> Online Consult
               </div>
             </lable>
           </div>
