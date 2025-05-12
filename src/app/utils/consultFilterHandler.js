@@ -2,6 +2,8 @@
 import toast from "react-hot-toast";
 
 export const ConsultFilterHandeler = async ( setAllDoctorsData, hosVisit) => {
+  console.log(hosVisit);
+  
     try {
       const res = await fetch(`/api/filterdDoctor?hospitalVisit=${hosVisit}`);
       const data = await res.json();

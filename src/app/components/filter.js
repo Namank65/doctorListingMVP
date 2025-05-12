@@ -8,7 +8,7 @@ export default function SideBar() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [hosVisit, setHosVisit] = useState();
   const [modeOfConsult, setModeOfConsult] = useState("");
-  const { setAllDoctorsData } = Context();
+  const { setAllDoctorsData, doctorsData } = Context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
@@ -35,18 +35,9 @@ export default function SideBar() {
     if (isChecked) {
       setModeOfConsult(inputName)
       setHosVisit(true)
-    }
-    if (!isChecked) {
+    }else{
       setModeOfConsult("")
     }
-
-    // if (isChecked && inputName === "hosVisit") {
-    //   setHosVisit(true)
-    // }
-
-    // if(isChecked && inputName === "onlineConsult"){
-    //   setHosVisit(false)
-    // }
   };
 
   useEffect(() => {
@@ -55,9 +46,8 @@ export default function SideBar() {
         if (priceRange.max > 0 && priceRange.min > 0) {
           await FilterHandeler(priceRange, setAllDoctorsData);
         }
-        if (modeOfConsult === "onlineConsult" || modeOfConsult === "hosVisit") {
+        if ( modeOfConsult === "hosVisit") {
           console.log(modeOfConsult);
-          
           await ConsultFilterHandeler(setAllDoctorsData, hosVisit);
         }
       } catch (error) {
@@ -66,7 +56,7 @@ export default function SideBar() {
     };
   
     fetchData();
-  }, [priceRange, hosVisit]);
+  }, [priceRange, modeOfConsult]);
   
 
   return (
@@ -74,7 +64,7 @@ export default function SideBar() {
       <div className="p-3 w-fit sm:block hidden">
         <div className="flex gap-20 py-3">
           <h1 className="text-lg">Filters</h1>
-          <button className="text-[#106C89]">Clear all</button>
+          <button onClick={() => doctorsData()} className="text-[#106C89] cursor-pointer hover:text-amber-500">Clear all</button>
         </div>
         <div>
           <hr className="h-1 w-full opacity-20 rounded-2xl pb-5" />
