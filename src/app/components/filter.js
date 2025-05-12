@@ -25,18 +25,25 @@ export default function SideBar() {
     if (isChecked && inputName === "OneKPlus") {
       setPriceRange({ min: 1000, max: 5000 });
     }
+
+    if (!isChecked) {
+      doctorsData()
+    }
   };
 
   const handleModeOfConsult = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
-    console.log(e.target);
     
     if (isChecked) {
       setModeOfConsult(inputName)
       setHosVisit(true)
     }else{
       setModeOfConsult("")
+    }
+
+    if (!isChecked) {
+      doctorsData()
     }
   };
 
@@ -47,7 +54,6 @@ export default function SideBar() {
           await FilterHandeler(priceRange, setAllDoctorsData);
         }
         if ( modeOfConsult === "hosVisit") {
-          console.log(modeOfConsult);
           await ConsultFilterHandeler(setAllDoctorsData, hosVisit);
         }
       } catch (error) {
