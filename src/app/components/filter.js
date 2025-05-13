@@ -27,7 +27,7 @@ export default function SideBar() {
     }
 
     if (!isChecked) {
-      doctorsData()
+      doctorsData();
     }
   };
 
@@ -49,11 +49,13 @@ export default function SideBar() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setAllDoctorsData(null)
       try {
-        if (priceRange.max > 0 && priceRange.min > 0) {
+        if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult ) {
           await FilterHandeler(priceRange, setAllDoctorsData);
+
         }
-        if ( modeOfConsult === "hosVisit") {
+        if ( modeOfConsult && hosVisit) {
           await ConsultFilterHandeler(setAllDoctorsData, hosVisit);
         }
       } catch (error) {
