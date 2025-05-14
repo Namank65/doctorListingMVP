@@ -6,7 +6,6 @@ export const FilterHandeler = async (priceRange, setAllDoctorsData) => {
       const res = await fetch(`/api/filterdDoctor?minFees=${priceRange?.min}&maxFees=${priceRange?.max}`);
       const data = await res.json();
       setAllDoctorsData(data?.allDoctors)
-      console.log(data);
 
       if (!res.ok) {
         toast.error(data.error || "Something went wrong");

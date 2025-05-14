@@ -16,6 +16,8 @@ export default function SideBar() {
 
     if (isChecked && inputName === "oneToFive") {
       setPriceRange({ min: 100, max: 500 });
+    }else{
+      setPriceRange({ min: 0, max: 0 });  
     }
 
     if (isChecked && inputName === "FiveToOneK") {
@@ -40,10 +42,12 @@ export default function SideBar() {
       setHosVisit(true)
     }else{
       setModeOfConsult("")
+      setHosVisit(false)
     }
-
+    
     if (!isChecked) {
       doctorsData()
+      setHosVisit(false)
     }
   };
 

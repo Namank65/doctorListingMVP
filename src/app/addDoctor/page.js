@@ -9,6 +9,7 @@ const AddDoctorForm = () => {
     experience: '',
     fees: '',
     hospitalVisit: false,
+    onlineConsult: false,
     hospitalName: '',
     avatar: '',
     language: '',
@@ -21,6 +22,7 @@ const AddDoctorForm = () => {
       [name]: type === 'checkbox' ? checked : value,
     });
   };
+console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,9 +58,11 @@ const AddDoctorForm = () => {
       <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
       <input name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
       <input name="language" className='border w-6/12 p-2  rounded' placeholder="Language" onChange={handleChange} required />
-      <label>
+      <label className=' flex gap-2'>
         <input type="checkbox" name="hospitalVisit" onChange={handleChange} />
         Hospital Visit
+        <input type="checkbox" name="onlineConsult" onChange={handleChange} />
+        Online Consult
       </label>
       <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Doctor</button>
     </form>

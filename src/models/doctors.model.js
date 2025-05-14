@@ -17,7 +17,11 @@ const doctorsSchema = new mongoose.Schema(
     },
     hospitalVisit: {
       type: Boolean,
-      default: true,
+      default: false,
+    },
+    onlineConsult: {
+      type: Boolean,
+      default: false,
     },
     hospitalName: {
       type: String

@@ -5,6 +5,7 @@ export const ConsultFilterHandeler = async ( setAllDoctorsData, hosVisit) => {
   console.log(hosVisit);
   
     try {
+      // const res = await fetch(`/api/filterdDoctor?${hosVisit === "hosVisit" ? hospitalVisit=hosVisit : onlineConsult=hosVisit }`);
       const res = await fetch(`/api/filterdDoctor?hospitalVisit=${hosVisit}`);
       const data = await res.json();
       setAllDoctorsData(data?.allDoctors)
