@@ -6,26 +6,32 @@ import { ConsultFilterHandeler } from "../utils/consultFilterHandler";
 
 export default function SideBar() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
-  const [hosVisit, setHosVisit] = useState();
+  const [hosVisit, setHosVisit] = useState(false);
   const [modeOfConsult, setModeOfConsult] = useState("");
+  const [priceState, setPriceState] = useState("");
   const { setAllDoctorsData, doctorsData } = Context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
-
+    
+    
     if (isChecked && inputName === "oneToFive") {
       setPriceRange({ min: 100, max: 500 });
+      setPriceState(inputName)
     }else{
       setPriceRange({ min: 0, max: 0 });  
+      setPriceState("")
     }
-
+    
     if (isChecked && inputName === "FiveToOneK") {
       setPriceRange({ min: 500, max: 1000 });
+      setPriceState(inputName)
     }
-
+    
     if (isChecked && inputName === "OneKPlus") {
       setPriceRange({ min: 1000, max: 5000 });
+      setPriceState(inputName)
     }
 
     if (!isChecked) {
@@ -57,10 +63,9 @@ export default function SideBar() {
       try {
         if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult ) {
           await FilterHandeler(priceRange, setAllDoctorsData);
-
         }
         if ( modeOfConsult && hosVisit) {
-          await ConsultFilterHandeler(setAllDoctorsData, hosVisit);
+          await ConsultFilterHandeler(setAllDoctorsData, hosVisit, modeOfConsult);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -120,6 +125,7 @@ export default function SideBar() {
                 <input
                   type="checkbox"
                   name="oneToFive"
+                  checked={priceState === "oneToFive"}
                   onChange={handleCheckboxChange}
                 />
                 100-500
@@ -128,6 +134,7 @@ export default function SideBar() {
                 <input
                   type="checkbox"
                   name="FiveToOneK"
+                  checked={priceState === "FiveToOneK"}
                   onChange={handleCheckboxChange}
                 />
                 500-1000
@@ -136,6 +143,7 @@ export default function SideBar() {
                 <input
                   type="checkbox"
                   name="OneKPlus"
+                  checked={priceState === "OneKPlus"}
                   onChange={handleCheckboxChange}
                 />
                 1000+

@@ -16,13 +16,13 @@ const AddDoctorForm = () => {
   });
 
   const handleChange = (e) => {
+    console.log(e);
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
   };
-console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

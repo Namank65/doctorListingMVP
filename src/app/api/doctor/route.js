@@ -11,26 +11,18 @@ export async function POST(request) {
       experience,
       fees,
       hospitalVisit,
+      onlineConsult,
       hospitalName,
       avatar,
       language,
     } = body;
-
-    console.log(
-      doctorName,
-      experience,
-      fees,
-      hospitalVisit,
-      hospitalName,
-      avatar,
-      language
-    );
 
     if (
       !doctorName ||
       !experience ||
       !fees ||
       !hospitalName ||
+      !onlineConsult ||
       !avatar ||
       !language
     ) {
@@ -47,6 +39,7 @@ export async function POST(request) {
       experience,
       fees,
       hospitalVisit,
+      onlineConsult,
       hospitalName,
       avatar,
       language,
