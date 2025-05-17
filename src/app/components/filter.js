@@ -62,9 +62,6 @@ export default function SideBar() {
   const experienceHandler = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
-
-    console.log(isChecked);
-    console.log(experienceRange);
     
     if (isChecked && inputName === "ZeroToFive") {
       setExperienceRange({ min: 1, max: 4 });
@@ -74,12 +71,12 @@ export default function SideBar() {
       setExperenceState("");
     }
     
-    if (isChecked && inputName) {
+    if (isChecked && inputName === "sixToTen") {
       setExperienceRange({ min: 5, max: 9 });
       setExperenceState(inputName);
     }
     
-    if (isChecked && inputName) {
+    if (isChecked && inputName === "ellevenPlus") {
       setExperienceRange({ min: 10, max: 50 });
       setExperenceState(inputName);
     }
@@ -92,7 +89,6 @@ export default function SideBar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(experienceRange);
       
       setAllDoctorsData(null);
       try {
@@ -107,8 +103,6 @@ export default function SideBar() {
           );
         }
         if (experienceRange.min > 0 && experienceRange.max > 0) {
-          console.log(experienceRange);
-          
           await experienceFilterHandler(
             setAllDoctorsData,
             experienceRange
@@ -173,10 +167,10 @@ export default function SideBar() {
                 <input type="checkbox" name="ZeroToFive" checked={experienceState === "ZeroToFive"} onChange={experienceHandler} /> 0-5
               </div>
               <div>
-                <input type="checkbox"  onChange={experienceHandler}/> 6-10
+                <input type="checkbox" name="sixToTen" onChange={experienceHandler}/> 6-10
               </div>
               <div>
-                <input type="checkbox" onChange={experienceHandler}/> 11+
+                <input type="checkbox" name="ellevenPlus" onChange={experienceHandler}/> 11+
               </div>
             </lable>
           </div>
