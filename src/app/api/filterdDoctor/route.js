@@ -58,11 +58,6 @@ export async function GET(request) {
     };
   }
 
-  // if (experience) {
-  //   baseQuery.experience = {
-  //     $gte: Number(experience),
-  //   };
-  // }
   if (hospitalVisit) {
     baseQuery.hospitalVisit = hospitalVisit;
   }

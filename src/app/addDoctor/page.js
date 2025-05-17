@@ -57,7 +57,23 @@ const AddDoctorForm = () => {
       <input name="fees" className='border w-6/12 p-2  rounded' placeholder="Fees" type="number" onChange={handleChange} required />
       <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
       <input name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
-      <input name="language" className='border w-6/12 p-2  rounded' placeholder="Language" onChange={handleChange} required />
+      {/* <input name="language" className='border w-6/12 p-2  rounded' placeholder="Language" onChange={handleChange} required /> */}
+
+      <div className="p-4">
+      <label htmlFor="language" className="block font-semibold mb-2">Select Language:</label>
+      <select
+        id="language"
+        name="language"
+        onChange={handleChange}
+        className="border p-2 rounded"
+      >
+        <option value="">-- Choose a Language --</option>
+        <option value="English">English</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Telugu">Telugu</option>
+      </select>
+    </div>
+
       <label className=' flex gap-2'>
         <input type="checkbox" name="hospitalVisit" onChange={handleChange} />
         Hospital Visit

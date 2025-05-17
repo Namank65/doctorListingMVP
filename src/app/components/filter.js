@@ -4,11 +4,14 @@ import { Context } from "../utils/context";
 import { FilterHandeler } from "../utils/feesFilterHandler";
 import { ConsultFilterHandeler } from "../utils/consultFilterHandler";
 import { experienceFilterHandler } from "../utils/experenceFilterHandler";
+import { languageFilterHandler } from "../utils/languageFilterHandler";
 
 export default function SideBar() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [experienceRange, setExperienceRange] = useState({ min: 0, max: 0 });
   const [hosVisit, setHosVisit] = useState(false);
+  const [language, setLanguage] = useState("");
+  const [languageState, setLanguageState] = useState("");
   const [modeOfConsult, setModeOfConsult] = useState("");
   const [priceState, setPriceState] = useState("");
   const [experienceState, setExperenceState] = useState("");
@@ -59,10 +62,36 @@ export default function SideBar() {
     }
   };
 
+  const languageHandler = (e) => {
+    const isChecked = e.target.checked;
+    const inputName = e.target.name;
+
+    if (isChecked && inputName === "english") {
+      setLanguage("English")
+      setLanguageState(inputName);
+    } else {
+      setLanguageState("");
+    }
+
+    if (isChecked && inputName === "hindi") {
+      setLanguage("Hindi")
+      setLanguageState(inputName);
+    }
+
+    if (isChecked && inputName === "telugu") {
+      setLanguage("Telugu")
+      setLanguageState(inputName);
+    }
+
+    if (!isChecked) {
+      doctorsData();
+    }
+  };
+
   const experienceHandler = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
-    
+
     if (isChecked && inputName === "ZeroToFive") {
       setExperienceRange({ min: 1, max: 4 });
       setExperenceState(inputName);
@@ -70,12 +99,12 @@ export default function SideBar() {
       setExperienceRange({ min: 0, max: 0 });
       setExperenceState("");
     }
-    
+
     if (isChecked && inputName === "sixToTen") {
       setExperienceRange({ min: 5, max: 9 });
       setExperenceState(inputName);
     }
-    
+
     if (isChecked && inputName === "ellevenPlus") {
       setExperienceRange({ min: 10, max: 50 });
       setExperenceState(inputName);
@@ -84,13 +113,11 @@ export default function SideBar() {
     if (!isChecked) {
       doctorsData();
     }
-
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      
-      setAllDoctorsData(null);
+      // setAllDoctorsData(null);
       try {
         if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) {
           await FilterHandeler(priceRange, setAllDoctorsData);
@@ -103,10 +130,10 @@ export default function SideBar() {
           );
         }
         if (experienceRange.min > 0 && experienceRange.max > 0) {
-          await experienceFilterHandler(
-            setAllDoctorsData,
-            experienceRange
-          );
+          await experienceFilterHandler(setAllDoctorsData, experienceRange);
+        }
+        if (language) {
+          await languageFilterHandler(setAllDoctorsData, language);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -114,7 +141,7 @@ export default function SideBar() {
     };
 
     fetchData();
-  }, [priceRange, modeOfConsult, experienceRange]);
+  }, [priceRange, modeOfConsult, experienceRange, language]);
 
   return (
     <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
@@ -164,13 +191,31 @@ export default function SideBar() {
             <h2>Experience (In Years)</h2>
             <lable className="font-normal">
               <div>
-                <input type="checkbox" name="ZeroToFive" checked={experienceState === "ZeroToFive"} onChange={experienceHandler} /> 0-5
+                <input
+                  type="checkbox"
+                  name="ZeroToFive"
+                  checked={experienceState === "ZeroToFive"}
+                  onChange={experienceHandler}
+                />
+                0-5
               </div>
               <div>
-                <input type="checkbox" name="sixToTen" onChange={experienceHandler}/> 6-10
+                <input
+                  type="checkbox"
+                  name="sixToTen"
+                  checked={experienceState === "sixToTen"}
+                  onChange={experienceHandler}
+                />
+                6-10
               </div>
               <div>
-                <input type="checkbox" name="ellevenPlus" onChange={experienceHandler}/> 11+
+                <input
+                  type="checkbox"
+                  name="ellevenPlus"
+                  checked={experienceState === "ellevenPlus"}
+                  onChange={experienceHandler}
+                />
+                11+
               </div>
             </lable>
           </div>
@@ -212,13 +257,31 @@ export default function SideBar() {
             <h2>Language</h2>
             <lable className="font-normal">
               <div>
-                <input type="checkbox" /> English
+                <input
+                  type="checkbox"
+                  name="english"
+                  checked={languageState === "english"}
+                  onChange={languageHandler}
+                />
+                English
               </div>
               <div>
-                <input type="checkbox" /> Hindi
+                <input
+                  type="checkbox"
+                  name="hindi"
+                  checked={languageState === "hindi"}
+                  onChange={languageHandler}
+                />
+                Hindi
               </div>
               <div>
-                <input type="checkbox" /> Telugu
+                <input
+                  type="checkbox"
+                  name="telugu"
+                  checked={languageState === "telugu"}
+                  onChange={languageHandler}
+                />
+                Telugu
               </div>
             </lable>
           </div>

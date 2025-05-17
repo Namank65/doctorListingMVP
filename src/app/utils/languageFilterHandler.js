@@ -1,10 +1,9 @@
 "use client"
 import toast from "react-hot-toast";
 
-export const experienceFilterHandler = async (setAllDoctorsData,experienceRange) => {
+export const languageFilterHandler = async (setAllDoctorsData, language) => {
     try {
-      const {min, max} = experienceRange
-      const res = await fetch(`/api/filterdDoctor?minExperience=${min}&maxExperience=${max}`);
+      const res = await fetch(`/api/filterdDoctor?language=${language}`);
       const data = await res.json();
       setAllDoctorsData(data?.allDoctors)
 
