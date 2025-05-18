@@ -5,12 +5,14 @@ import { FilterHandeler } from "../utils/feesFilterHandler";
 import { ConsultFilterHandeler } from "../utils/consultFilterHandler";
 import { experienceFilterHandler } from "../utils/experenceFilterHandler";
 import { languageFilterHandler } from "../utils/languageFilterHandler";
+import { facilityFilterHandeler } from "../utils/facilityFilterHandler";
 
 export default function SideBar() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [experienceRange, setExperienceRange] = useState({ min: 0, max: 0 });
   const [hosVisit, setHosVisit] = useState(false);
   const [language, setLanguage] = useState("");
+  const [facilityState, setFacilityState] = useState("");
   const [languageState, setLanguageState] = useState("");
   const [modeOfConsult, setModeOfConsult] = useState("");
   const [priceState, setPriceState] = useState("");
@@ -59,6 +61,25 @@ export default function SideBar() {
     if (!isChecked) {
       doctorsData();
       setHosVisit(false);
+    }
+  };
+
+  const facilityHandeler = (e) => {
+    const isChecked = e.target.checked;
+    const inputName = e.target.name;
+    console.log(e.target);
+    
+    if (isChecked && inputName === "apolloHos") {
+      setFacilityState(inputName);
+    } else {
+      setFacilityState("");
+    }
+    if (isChecked && inputName === "otherClinics") {
+      setFacilityState(inputName);
+    } 
+
+    if (!isChecked) {
+      doctorsData();
     }
   };
 
@@ -135,13 +156,16 @@ export default function SideBar() {
         if (language) {
           await languageFilterHandler(setAllDoctorsData, language);
         }
+        if (facilityState === "apolloHos") {
+          await facilityFilterHandeler(setAllDoctorsData);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [priceRange, modeOfConsult, experienceRange, language]);
+  }, [priceRange, modeOfConsult, experienceRange, language, facilityState]);
 
   return (
     <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
@@ -290,10 +314,12 @@ export default function SideBar() {
             <h2>Facility</h2>
             <lable className="font-normal">
               <div>
-                <input type="checkbox" /> Apollo Hospital
+                <input type="checkbox" name="apolloHos" checked={facilityState === "apolloHos"}
+                  onChange={facilityHandeler} /> Apollo Hospital
               </div>
               <div>
-                <input type="checkbox" /> Other Clinics
+                <input type="checkbox" name="otherClinics" checked={facilityState === "otherClinics"}
+                  onChange={facilityHandeler} /> Other Clinics
               </div>
             </lable>
           </div>

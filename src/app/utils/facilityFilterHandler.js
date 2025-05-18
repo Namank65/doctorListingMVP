@@ -3,10 +3,11 @@ import toast from "react-hot-toast";
 
 export const facilityFilterHandeler = async ( setAllDoctorsData) => {
     try {
-        //apolloHospital
-      const res = await fetch(`/api/filterdDoctor?${modeOfConsult === "hosVisit" ? `hospitalVisit=${hosVisit}` : `onlineConsult=${hosVisit}`}`)
+      const res = await fetch(`/api/filterdDoctor?apolloHospital=${true}`)
       const data = await res.json();
       setAllDoctorsData(data?.allDoctors)
+      console.log(data);
+      
 
       if (!res.ok) {
         toast.error(data.error || "Something went wrong");
