@@ -70,6 +70,7 @@ export default function SideBar() {
       setLanguage("English")
       setLanguageState(inputName);
     } else {
+      setLanguage("")
       setLanguageState("");
     }
 
@@ -117,7 +118,6 @@ export default function SideBar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // setAllDoctorsData(null);
       try {
         if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) {
           await FilterHandeler(priceRange, setAllDoctorsData);

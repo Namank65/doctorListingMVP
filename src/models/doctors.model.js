@@ -23,6 +23,10 @@ const doctorsSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    apolloHospital: {
+      type: Boolean,
+      default: false,
+    },
     hospitalName: {
       type: String
     },

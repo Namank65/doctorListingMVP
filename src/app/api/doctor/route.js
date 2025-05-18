@@ -15,6 +15,7 @@ export async function POST(request) {
       hospitalName,
       avatar,
       language,
+      apolloHospital
     } = body;
 
     if (
@@ -22,9 +23,8 @@ export async function POST(request) {
       !experience ||
       !fees ||
       !hospitalName ||
-      !onlineConsult ||
       !avatar ||
-      !language
+      !language 
     ) {
       return NextResponse.json(
         { error: "All Fields Are Required" },
@@ -43,6 +43,7 @@ export async function POST(request) {
       hospitalName,
       avatar,
       language,
+      apolloHospital
     });
 
     return NextResponse.json(

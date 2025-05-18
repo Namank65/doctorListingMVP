@@ -12,6 +12,7 @@ export async function GET(request) {
   const maxFees = searchParams.get("maxFees");
   const hospitalVisit = searchParams.get("hospitalVisit");
   const onlineConsult = searchParams.get("onlineConsult");
+  const apolloHospital = searchParams.get("apolloHospital");
   const hospitalName = searchParams.get("hospitalName");
   const language = searchParams.get("language");
 
@@ -69,6 +70,9 @@ export async function GET(request) {
   }
   if (language) {
     baseQuery.language = language;
+  }
+  if (apolloHospital) {
+    baseQuery.apolloHospital = apolloHospital;
   }
 
   try {

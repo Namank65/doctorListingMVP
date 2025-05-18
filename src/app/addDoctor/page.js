@@ -10,6 +10,7 @@ const AddDoctorForm = () => {
     fees: '',
     hospitalVisit: false,
     onlineConsult: false,
+    apolloHospital: false,
     hospitalName: '',
     avatar: '',
     language: '',
@@ -57,7 +58,6 @@ const AddDoctorForm = () => {
       <input name="fees" className='border w-6/12 p-2  rounded' placeholder="Fees" type="number" onChange={handleChange} required />
       <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
       <input name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
-      {/* <input name="language" className='border w-6/12 p-2  rounded' placeholder="Language" onChange={handleChange} required /> */}
 
       <div className="p-4">
       <label htmlFor="language" className="block font-semibold mb-2">Select Language:</label>
@@ -79,8 +79,10 @@ const AddDoctorForm = () => {
         Hospital Visit
         <input type="checkbox" name="onlineConsult" onChange={handleChange} />
         Online Consult
+        <input type="checkbox" name="apolloHospital" onChange={handleChange} />
+        Apollo Hospital
       </label>
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Doctor</button>
+      <button type="submit" className="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white p-2 rounded">Add Doctor</button>
     </form>
   );
 };
