@@ -67,7 +67,6 @@ export default function SideBar() {
   const facilityHandeler = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
-    console.log(e.target);
     
     if (isChecked && inputName === "apolloHos") {
       setFacilityState(inputName);
@@ -156,8 +155,8 @@ export default function SideBar() {
         if (language) {
           await languageFilterHandler(setAllDoctorsData, language);
         }
-        if (facilityState === "apolloHos") {
-          await facilityFilterHandeler(setAllDoctorsData);
+        if (facilityState) {
+          await facilityFilterHandeler(setAllDoctorsData, facilityState);
         }
       } catch (error) {
         console.error("Error fetching data:", error);

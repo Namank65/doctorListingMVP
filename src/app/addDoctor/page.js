@@ -53,6 +53,7 @@ const AddDoctorForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 px-4 py-10 items-center w-full">
+      <h1 className='text-2xl font-bold'>Add Yourself As A Doctor</h1>
       <input name="doctorName" className='border w-6/12 p-2  rounded' placeholder="Doctor Name" onChange={handleChange} required />
       <input name="experience" className='border w-6/12 p-2  rounded' placeholder="Experience" onChange={handleChange} required />
       <input name="fees" className='border w-6/12 p-2  rounded' placeholder="Fees" type="number" onChange={handleChange} required />

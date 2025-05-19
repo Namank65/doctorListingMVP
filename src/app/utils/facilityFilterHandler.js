@@ -1,14 +1,13 @@
 "use client"
 import toast from "react-hot-toast";
 
-export const facilityFilterHandeler = async ( setAllDoctorsData) => {
+export const facilityFilterHandeler = async ( setAllDoctorsData, facilityState ) => {
     try {
-      const res = await fetch(`/api/filterdDoctor?apolloHospital=${true}`)
+      const res = await fetch(`/api/filterdDoctor?${facilityState === "apolloHos" ? `apolloHospital=true` : ``}`)
+
       const data = await res.json();
       setAllDoctorsData(data?.allDoctors)
-      console.log(data);
       
-
       if (!res.ok) {
         toast.error(data.error || "Something went wrong");
       } else {

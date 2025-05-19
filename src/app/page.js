@@ -41,6 +41,12 @@ export default function Home() {
       {allDoctorsData?.map((e) => (
         <Doctor key={e._id} doctor={e} />
       ))}
+
+      <article className="flex gap-2 justify-center">
+        <button>prev</button>
+        <span>Page</span>
+        <button>next</button>
+      </article>
     </div>
   );
 }
