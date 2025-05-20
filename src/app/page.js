@@ -1,35 +1,19 @@
 "use client";
 import Link from "next/link";
 import Doctor from "./components/allDoctors";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { Context } from "./utils/context";
 
 export default function Home() {
-  const {allDoctorsData, setAllDoctorsData} = Context();
+  const {allDoctorsData, doctorsData} = Context();
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    const doctorsData = async () => {
-      try {
-        const res = await fetch("/api/doctor");
-        const data = await res.json();
-
-        if (!res.ok) {
-          toast.error(data.error || "Something went wrong");
-        } else {
-          toast.success("All Doctors Data Fetched Successfully");
-          setAllDoctorsData(data);
-        }
-      } catch (error) {
-        toast.error("Server error");
-        console.error(error);
-      }
-    };
     doctorsData();
   }, []);
 
   return (
-    <div className="flex justify-center w-fit h-full flex-col overflow-y-scroll px-5 gap-5 ">
+    <div className="flex justify-center w-fit px-11 flex-col overflow-y-scroll gap-5 ">
       <h1 className="font-bold text-2xl py-8">
         Consult General Physicians Online - Internal Medicine Specialists
       </h1>
@@ -42,10 +26,10 @@ export default function Home() {
         <Doctor key={e._id} doctor={e} />
       ))}
 
-      <article className="flex gap-2 justify-center">
-        <button>prev</button>
-        <span>Page</span>
-        <button>next</button>
+      <article className="flex gap-2 justify-center pb-2">
+        <button className="border px-4 bg-[#106C89] text-white rounded-xl cursor-pointer" onClick={() => setPage((prev) => prev - 1)}>Prev</button>
+        <span>{page}</span>
+        <button className="border px-4 bg-[#106C89] text-white rounded-xl cursor-pointer" onClick={() => setPage((prev) => prev + 1)}>Next</button>
       </article>
     </div>
   );
