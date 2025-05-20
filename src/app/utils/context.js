@@ -6,17 +6,25 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
     const [allDoctorsData, setAllDoctorsData] = useState(null);
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
     
-    const doctorsData = async () => {
+    const doctorsData = async (experienceRange) => {
       try {
-        const res = await fetch("/api/doctor");
+        let baseUrl = `/api/filterdDoctor?page=${page}`
+        console.log(experienceRange);
+        
+        // if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
+        let res = await fetch(baseUrl);
         const data = await res.json();
 
         if (!res.ok) {
           toast.error(data.error || "Something went wrong");
         } else {
           toast.success("All Doctors Data Fetched Successfully");
-          setAllDoctorsData(data);
+          setAllDoctorsData(data.allDoctors);
+          setTotalPage(data?.totalPage)
+          console.log(data);
         }
       } catch (error) {
         toast.error("Server error");
@@ -25,7 +33,7 @@ export function UserProvider({ children }) {
     };
 
   return (
-    <UserContext.Provider value={{ allDoctorsData, setAllDoctorsData, doctorsData }}>
+    <UserContext.Provider value={{ allDoctorsData, setAllDoctorsData, doctorsData, setPage, page, totalPage }}>
       {children}
     </UserContext.Provider>
   );

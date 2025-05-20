@@ -138,6 +138,8 @@ export default function SideBar() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(experienceRange);
+      
       try {
         if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) {
           await FilterHandeler(priceRange, setAllDoctorsData);
@@ -150,7 +152,8 @@ export default function SideBar() {
           );
         }
         if (experienceRange.min > 0 && experienceRange.max > 0) {
-          await experienceFilterHandler(setAllDoctorsData, experienceRange);
+          await doctorsData(setAllDoctorsData, experienceRange);
+          // await experienceFilterHandler(setAllDoctorsData, experienceRange);
         }
         if (language) {
           await languageFilterHandler(setAllDoctorsData, language);
