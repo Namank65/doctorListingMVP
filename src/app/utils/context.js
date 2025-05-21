@@ -9,12 +9,13 @@ export function UserProvider({ children }) {
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
     
-    const doctorsData = async (experienceRange) => {
+    const doctorsData = async () => {
+      // if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
+      // const {min, max} = experienceRange
+      // console.log(experienceRange);
       try {
         let baseUrl = `/api/filterdDoctor?page=${page}`
-        console.log(experienceRange);
         
-        // if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
         let res = await fetch(baseUrl);
         const data = await res.json();
 
@@ -22,7 +23,7 @@ export function UserProvider({ children }) {
           toast.error(data.error || "Something went wrong");
         } else {
           toast.success("All Doctors Data Fetched Successfully");
-          setAllDoctorsData(data.allDoctors);
+          setAllDoctorsData(data?.allDoctors);
           setTotalPage(data?.totalPage)
           console.log(data);
         }
