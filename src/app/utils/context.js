@@ -12,7 +12,7 @@ export function UserProvider({ children }) {
     const doctorsData = async () => {
       // if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
       // const {min, max} = experienceRange
-      // console.log(experienceRange);
+      console.log("hi");  
       try {
         let baseUrl = `/api/filterdDoctor?page=${page}`
         
