@@ -6,17 +6,15 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
     const [allDoctorsData, setAllDoctorsData] = useState(null);
+    const [experienceRange, setExperienceRange] = useState({ min: 0, max: 0 });
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
     
-    const doctorsData = async () => {
-      // if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
-      // const {min, max} = experienceRange
-      // console.log("congratulations");
-      
-
+    const doctorsData = async (experienceRange) => {
+      console.log(experienceRange);
       try {
         let baseUrl = `/api/filterdDoctor?page=${page}`
+        if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
         
         let res = await fetch(baseUrl);
         const data = await res.json();
@@ -36,7 +34,7 @@ export function UserProvider({ children }) {
     };
 
   return (
-    <UserContext.Provider value={{ allDoctorsData, setAllDoctorsData, doctorsData, setPage, page, totalPage }}>
+    <UserContext.Provider value={{ allDoctorsData, setAllDoctorsData, doctorsData, setPage, page, totalPage, setExperienceRange, experienceRange }}>
       {children}
     </UserContext.Provider>
   );

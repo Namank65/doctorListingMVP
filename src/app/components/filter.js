@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { Context } from "../utils/context";
 import { FilterHandeler } from "../utils/feesFilterHandler";
 import { ConsultFilterHandeler } from "../utils/consultFilterHandler";
-import { experienceFilterHandler } from "../utils/experenceFilterHandler";
 import { languageFilterHandler } from "../utils/languageFilterHandler";
 import { facilityFilterHandeler } from "../utils/facilityFilterHandler";
 
 export default function SideBar() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
-  const [experienceRange, setExperienceRange] = useState({ min: 0, max: 0 });
+  // const [experienceRange, setExperienceRange] = useState({ min: 0, max: 0 });
   const [hosVisit, setHosVisit] = useState(false);
   const [language, setLanguage] = useState("");
   const [facilityState, setFacilityState] = useState("");
@@ -17,7 +16,7 @@ export default function SideBar() {
   const [modeOfConsult, setModeOfConsult] = useState("");
   const [priceState, setPriceState] = useState("");
   const [experienceState, setExperenceState] = useState("");
-  const { setAllDoctorsData, doctorsData } = Context();
+  const { setAllDoctorsData, doctorsData,  setExperienceRange, experienceRange } = Context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
@@ -138,8 +137,6 @@ export default function SideBar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(experienceRange);
-      
       try {
         if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) {
           await FilterHandeler(priceRange, setAllDoctorsData);
@@ -152,8 +149,7 @@ export default function SideBar() {
           );
         }
         if (experienceRange.min > 0 && experienceRange.max > 0) {
-          await doctorsData(setAllDoctorsData, experienceRange);
-          // await experienceFilterHandler(setAllDoctorsData, experienceRange);
+          await doctorsData(experienceRange);
         }
         if (language) {
           await languageFilterHandler(setAllDoctorsData, language);

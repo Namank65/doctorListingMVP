@@ -5,13 +5,12 @@ import { useEffect } from "react";
 import { Context } from "./utils/context";
 
 export default function Home() {
-  const {allDoctorsData, doctorsData, setPage, page, totalPage} = Context();
+  const {allDoctorsData, doctorsData, setPage, page, totalPage, experienceRange} = Context();
   const isPrev = page > 1
   const isnext = page < totalPage
   
   useEffect(() => {
-    doctorsData();
-    
+    doctorsData(experienceRange);
   }, [page]);
   
   return (
