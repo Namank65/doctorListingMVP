@@ -149,7 +149,7 @@ export default function SideBar() {
           );
         }
         if (experienceRange.min > 0 && experienceRange.max > 0) {
-          await doctorsData(experienceRange);
+          await doctorsData();
         }
         if (language) {
           await languageFilterHandler(setAllDoctorsData, language);

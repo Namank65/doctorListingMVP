@@ -10,11 +10,11 @@ export function UserProvider({ children }) {
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
     
-    const doctorsData = async (experienceRange) => {
-      console.log(experienceRange);
+    const doctorsData = async () => {
+
       try {
         let baseUrl = `/api/filterdDoctor?page=${page}`
-        if (experienceRange) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
+        if (experienceRange.min > 0 && experienceRange.max > 0) baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
         
         let res = await fetch(baseUrl);
         const data = await res.json();

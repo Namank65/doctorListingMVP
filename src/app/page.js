@@ -5,12 +5,12 @@ import { useEffect } from "react";
 import { Context } from "./utils/context";
 
 export default function Home() {
-  const {allDoctorsData, doctorsData, setPage, page, totalPage, experienceRange} = Context();
+  const {allDoctorsData, doctorsData, setPage, page, totalPage} = Context();
   const isPrev = page > 1
   const isnext = page < totalPage
   
   useEffect(() => {
-    doctorsData(experienceRange);
+    doctorsData();
   }, [page]);
   
   return (
@@ -27,11 +27,11 @@ export default function Home() {
         <Doctor key={e._id} doctor={e} />
       ))}
 
-      <article className="flex gap-2 justify-center pb-2">
+      {totalPage > 1 && <article className="flex gap-2 justify-center pb-2">
         <button disabled={!isPrev} className={`border px-4 text-white rounded-xl cursor-pointer ${!isPrev ? `bg-[#8b9396]`: `bg-[#106C89]`}`} onClick={() => setPage((prev) => prev - 1)}>Prev</button>
         <span>{page} Of {totalPage}</span>
         <button disabled={!isnext} className={`border px-4 text-white rounded-xl cursor-pointer ${!isnext ? `bg-[#8b9396]`: `bg-[#106C89]`}`} onClick={() => setPage((prev) => prev + 1)}>Next</button>
-      </article>
+      </article>}
     </div>
   );
 }
