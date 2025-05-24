@@ -1,17 +1,12 @@
 "use client";
 import Link from "next/link";
 import Doctor from "./components/allDoctors";
-import { useEffect } from "react";
 import { Context } from "./utils/context";
 
 export default function Home() {
-  const {allDoctorsData, doctorsData, setPage, page, totalPage} = Context();
+  const {allDoctorsData, setPage, page, totalPage} = Context();
   const isPrev = page > 1
   const isnext = page < totalPage
-  
-  useEffect(() => {
-    doctorsData();
-  }, [page]);
   
   return (
     <div className="flex justify-center w-fit px-11 flex-col overflow-y-scroll gap-5 ">

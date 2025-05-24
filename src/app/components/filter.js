@@ -1,52 +1,47 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Context } from "../utils/context";
-import { FilterHandeler } from "../utils/feesFilterHandler";
-import { ConsultFilterHandeler } from "../utils/consultFilterHandler";
-import { languageFilterHandler } from "../utils/languageFilterHandler";
-import { facilityFilterHandeler } from "../utils/facilityFilterHandler";
 
 export default function SideBar() {
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
-  // const [experienceRange, setExperienceRange] = useState({ min: 0, max: 0 });
-  const [hosVisit, setHosVisit] = useState(false);
-  const [language, setLanguage] = useState("");
-  const [facilityState, setFacilityState] = useState("");
   const [languageState, setLanguageState] = useState("");
-  const [modeOfConsult, setModeOfConsult] = useState("");
   const [priceState, setPriceState] = useState("");
   const [experienceState, setExperenceState] = useState("");
   const {
-    setAllDoctorsData,
     doctorsData,
     setExperienceRange,
     experienceRange,
+    language,
+    setLanguage,
+    modeOfConsult,
+    setModeOfConsult,
+    setHosVisit,
+    facilityState,
+    setFacilityState,
+    priceRange,
+    setPriceRange,
+    page,
   } = Context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
 
-    if (isChecked && inputName === "oneToFive") {
+    if (isChecked) {
       setPriceRange({ min: 100, max: 400 });
       setPriceState(inputName);
+      if (inputName === "oneToFive") {
+        setPriceRange({ min: 100, max: 400 });
+        setPriceState(inputName);
+      } else if (inputName === "FiveToOneK") {
+        setPriceRange({ min: 500, max: 900 });
+        setPriceState(inputName);
+      } else if (inputName === "OneKPlus") {
+        setPriceRange({ min: 1000, max: 5000 });
+        setPriceState(inputName);
+      }
     } else {
       setPriceRange({ min: 0, max: 0 });
       setPriceState("");
-    }
-
-    if (isChecked && inputName === "FiveToOneK") {
-      setPriceRange({ min: 500, max: 900 });
-      setPriceState(inputName);
-    }
-
-    if (isChecked && inputName === "OneKPlus") {
-      setPriceRange({ min: 1000, max: 5000 });
-      setPriceState(inputName);
-    }
-
-    if (!isChecked) {
-      doctorsData();
     }
   };
 
@@ -61,28 +56,21 @@ export default function SideBar() {
       setModeOfConsult("");
       setHosVisit(false);
     }
-
-    if (!isChecked) {
-      doctorsData();
-      setHosVisit(false);
-    }
   };
 
   const facilityHandeler = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
 
-    if (isChecked && inputName === "apolloHos") {
+    if (isChecked) {
       setFacilityState(inputName);
+      if (inputName === "apolloHos") {
+        setFacilityState(inputName);
+      } else if (inputName === "otherClinics") {
+        setFacilityState(inputName);
+      }
     } else {
       setFacilityState("");
-    }
-    if (isChecked && inputName === "otherClinics") {
-      setFacilityState(inputName);
-    }
-
-    if (!isChecked) {
-      doctorsData();
     }
   };
 
@@ -90,26 +78,20 @@ export default function SideBar() {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
 
-    if (isChecked && inputName === "english") {
-      setLanguage("English");
-      setLanguageState(inputName);
+    if (isChecked) {
+      if (inputName === "english") {
+        setLanguage("English");
+        setLanguageState(inputName);
+      } else if (inputName === "hindi") {
+        setLanguage("Hindi");
+        setLanguageState(inputName);
+      } else if (inputName === "telugu") {
+        setLanguage("Telugu");
+        setLanguageState(inputName);
+      }
     } else {
       setLanguage("");
       setLanguageState("");
-    }
-
-    if (isChecked && inputName === "hindi") {
-      setLanguage("Hindi");
-      setLanguageState(inputName);
-    }
-
-    if (isChecked && inputName === "telugu") {
-      setLanguage("Telugu");
-      setLanguageState(inputName);
-    }
-
-    if (!isChecked) {
-      doctorsData();
     }
   };
 
@@ -134,30 +116,19 @@ export default function SideBar() {
     }
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (experienceRange.min > 0 && experienceRange.max > 0) {
+        if (
+          (experienceRange.min > 0 && experienceRange.max > 0) ||
+          language ||
+          modeOfConsult ||
+          facilityState ||
+          (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult)
+        ) {
           await doctorsData();
         } else {
           doctorsData();
-        }
-        if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) {
-          await FilterHandeler(priceRange, setAllDoctorsData);
-        }
-        if (modeOfConsult && hosVisit) {
-          await ConsultFilterHandeler(
-            setAllDoctorsData,
-            hosVisit,
-            modeOfConsult
-          );
-        }
-        if (language) {
-          await languageFilterHandler(setAllDoctorsData, language);
-        }
-        if (facilityState) {
-          await facilityFilterHandeler(setAllDoctorsData, facilityState);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -165,7 +136,14 @@ export default function SideBar() {
     };
 
     fetchData();
-  }, [priceRange, modeOfConsult, experienceRange, language, facilityState]);
+  }, [
+    priceRange,
+    modeOfConsult,
+    experienceRange,
+    language,
+    facilityState,
+    page,
+  ]);
 
   return (
     <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
@@ -319,7 +297,7 @@ export default function SideBar() {
                   name="apolloHos"
                   checked={facilityState === "apolloHos"}
                   onChange={facilityHandeler}
-                />{" "}
+                />
                 Apollo Hospital
               </div>
               <div>
@@ -328,7 +306,7 @@ export default function SideBar() {
                   name="otherClinics"
                   checked={facilityState === "otherClinics"}
                   onChange={facilityHandeler}
-                />{" "}
+                />
                 Other Clinics
               </div>
             </lable>
