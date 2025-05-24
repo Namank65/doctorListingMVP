@@ -16,7 +16,12 @@ export default function SideBar() {
   const [modeOfConsult, setModeOfConsult] = useState("");
   const [priceState, setPriceState] = useState("");
   const [experienceState, setExperenceState] = useState("");
-  const { setAllDoctorsData, doctorsData,  setExperienceRange, experienceRange } = Context();
+  const {
+    setAllDoctorsData,
+    doctorsData,
+    setExperienceRange,
+    experienceRange,
+  } = Context();
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
@@ -66,7 +71,7 @@ export default function SideBar() {
   const facilityHandeler = (e) => {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
-    
+
     if (isChecked && inputName === "apolloHos") {
       setFacilityState(inputName);
     } else {
@@ -74,7 +79,7 @@ export default function SideBar() {
     }
     if (isChecked && inputName === "otherClinics") {
       setFacilityState(inputName);
-    } 
+    }
 
     if (!isChecked) {
       doctorsData();
@@ -86,20 +91,20 @@ export default function SideBar() {
     const inputName = e.target.name;
 
     if (isChecked && inputName === "english") {
-      setLanguage("English")
+      setLanguage("English");
       setLanguageState(inputName);
     } else {
-      setLanguage("")
+      setLanguage("");
       setLanguageState("");
     }
 
     if (isChecked && inputName === "hindi") {
-      setLanguage("Hindi")
+      setLanguage("Hindi");
       setLanguageState(inputName);
     }
 
     if (isChecked && inputName === "telugu") {
-      setLanguage("Telugu")
+      setLanguage("Telugu");
       setLanguageState(inputName);
     }
 
@@ -112,32 +117,32 @@ export default function SideBar() {
     const isChecked = e.target.checked;
     const inputName = e.target.name;
 
-    if (isChecked && inputName === "ZeroToFive") {
-      setExperienceRange({ min: 1, max: 4 });
-      setExperenceState(inputName);
+    if (isChecked) {
+      if (inputName === "ZeroToFive") {
+        setExperienceRange({ min: 1, max: 4 });
+        setExperenceState(inputName);
+      } else if (inputName === "sixToTen") {
+        setExperienceRange({ min: 5, max: 9 });
+        setExperenceState(inputName);
+      } else if (inputName === "ellevenPlus") {
+        setExperienceRange({ min: 10, max: 50 });
+        setExperenceState(inputName);
+      }
     } else {
       setExperienceRange({ min: 0, max: 0 });
       setExperenceState("");
     }
-
-    if (isChecked && inputName === "sixToTen") {
-      setExperienceRange({ min: 5, max: 9 });
-      setExperenceState(inputName);
-    }
-
-    if (isChecked && inputName === "ellevenPlus") {
-      setExperienceRange({ min: 10, max: 50 });
-      setExperenceState(inputName);
-    }
-
-    if (!isChecked) {
-      doctorsData();
-    }
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (experienceRange.min > 0 && experienceRange.max > 0) {
+          await doctorsData();
+        } else {
+          doctorsData();
+        }
         if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) {
           await FilterHandeler(priceRange, setAllDoctorsData);
         }
@@ -147,9 +152,6 @@ export default function SideBar() {
             hosVisit,
             modeOfConsult
           );
-        }
-        if (experienceRange.min > 0 && experienceRange.max > 0) {
-          await doctorsData();
         }
         if (language) {
           await languageFilterHandler(setAllDoctorsData, language);
@@ -312,12 +314,22 @@ export default function SideBar() {
             <h2>Facility</h2>
             <lable className="font-normal">
               <div>
-                <input type="checkbox" name="apolloHos" checked={facilityState === "apolloHos"}
-                  onChange={facilityHandeler} /> Apollo Hospital
+                <input
+                  type="checkbox"
+                  name="apolloHos"
+                  checked={facilityState === "apolloHos"}
+                  onChange={facilityHandeler}
+                />{" "}
+                Apollo Hospital
               </div>
               <div>
-                <input type="checkbox" name="otherClinics" checked={facilityState === "otherClinics"}
-                  onChange={facilityHandeler} /> Other Clinics
+                <input
+                  type="checkbox"
+                  name="otherClinics"
+                  checked={facilityState === "otherClinics"}
+                  onChange={facilityHandeler}
+                />{" "}
+                Other Clinics
               </div>
             </lable>
           </div>
