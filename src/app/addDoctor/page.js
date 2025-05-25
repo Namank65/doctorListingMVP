@@ -17,7 +17,6 @@ const AddDoctorForm = () => {
   });
 
   const handleChange = (e) => {
-    console.log(e);
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
@@ -26,8 +25,9 @@ const AddDoctorForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
-
+    
     try {
       const res = await fetch('/api/doctor', {
         method: 'POST',
@@ -36,7 +36,7 @@ const AddDoctorForm = () => {
       });
 
       const data = await res.json();
-
+      
       if (!res.ok) {
         toast.error(data.error || 'Something went wrong');
         console.log(data.error);
@@ -44,6 +44,18 @@ const AddDoctorForm = () => {
       } else {
         toast.success('Doctor added successfully');
         console.log(data);
+
+        for (let i = 0; i < e.target.length; i++) {
+          let input = e.target[i]
+
+          if (input) {
+            input.value = ''
+          }
+           if(input.type === "checkbox"){
+            input.checked = false
+          }
+        }
+
       }
     } catch (error) {
       toast.error('Server error');
@@ -75,7 +87,7 @@ const AddDoctorForm = () => {
       </select>
     </div>
 
-      <label className=' flex gap-2'>
+      <label className='flex gap-2'>
         <input type="checkbox" name="hospitalVisit" onChange={handleChange} />
         Hospital Visit
         <input type="checkbox" name="onlineConsult" onChange={handleChange} />
