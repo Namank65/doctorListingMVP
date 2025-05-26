@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@imagekit/next": "^2.1.2",
     "@tailwindcss/postcss": "^4.1.5",
+    "imagekit": "^6.0.0",
     "mongoose": "^8.14.1",
     "next": "15.3.1",
     "postcss": "^8.5.3",

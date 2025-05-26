@@ -25,7 +25,6 @@ const AddDoctorForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     
     try {
@@ -39,15 +38,11 @@ const AddDoctorForm = () => {
       
       if (!res.ok) {
         toast.error(data.error || 'Something went wrong');
-        console.log(data.error);
-        
       } else {
         toast.success('Doctor added successfully');
-        console.log(data);
 
         for (let i = 0; i < e.target.length; i++) {
           let input = e.target[i]
-
           if (input) {
             input.value = ''
           }
@@ -55,11 +50,9 @@ const AddDoctorForm = () => {
             input.checked = false
           }
         }
-
       }
     } catch (error) {
       toast.error('Server error');
-      console.error(error);
     }
   };
 
