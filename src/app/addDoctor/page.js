@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Context } from '../utils/context';
+import { UploadExample } from '../utils/uploadAvatarImgKt';
 
 const AddDoctorForm = () => {
+  const{fileInputRef} = Context();
   const [formData, setFormData] = useState({
     doctorName: '',
     experience: '',
@@ -63,7 +66,12 @@ const AddDoctorForm = () => {
       <input name="experience" className='border w-6/12 p-2  rounded' placeholder="Experience" onChange={handleChange} required />
       <input name="fees" className='border w-6/12 p-2  rounded' placeholder="Fees" type="number" onChange={handleChange} required />
       <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
-      <input name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
+
+      <div>
+      <input type='file' ref={fileInputRef} name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
+      <button type="button" onClick={UploadExample}>Upload file</button>
+
+      </div>
 
       <div className="p-4">
       <label htmlFor="language" className="block font-semibold mb-2">Select Language:</label>

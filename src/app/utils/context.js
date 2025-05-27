@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const UserContext = createContext();
@@ -14,6 +14,12 @@ export function UserProvider({ children }) {
   const [facilityState, setFacilityState] = useState("");
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+
+
+    const fileInputRef = useRef(null);
+
+
+
 
   const doctorsData = async () => {
     try {
@@ -62,7 +68,8 @@ export function UserProvider({ children }) {
         facilityState,
         setFacilityState,
         priceRange,
-        setPriceRange
+        setPriceRange,
+        fileInputRef
       }}
     >
       {children}
