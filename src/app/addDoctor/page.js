@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Context } from '../utils/context';
-import { UploadExample } from '../utils/uploadAvatarImgKt';
+import  UploadExample  from '../utils/uploadAvatarImgKt';
 
 const AddDoctorForm = () => {
-  const{fileInputRef} = Context();
+  // const{fileInputRef} = Context();
   const [formData, setFormData] = useState({
     doctorName: '',
     experience: '',
@@ -44,15 +44,15 @@ const AddDoctorForm = () => {
       } else {
         toast.success('Doctor added successfully');
 
-        for (let i = 0; i < e.target.length; i++) {
-          let input = e.target[i]
-          if (input) {
-            input.value = ''
-          }
-           if(input.type === "checkbox"){
-            input.checked = false
-          }
-        }
+        // for (let i = 0; i < e.target.length; i++) {
+        //   let input = e.target[i]
+        //   if (input) {
+        //     input.value = ''
+        //   }
+        //    if(input.type === "checkbox"){
+        //     input.checked = false
+        //   }
+        // }
       }
     } catch (error) {
       toast.error('Server error');
@@ -67,11 +67,13 @@ const AddDoctorForm = () => {
       <input name="fees" className='border w-6/12 p-2  rounded' placeholder="Fees" type="number" onChange={handleChange} required />
       <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
 
-      <div>
+      {/* <div>
       <input type='file' ref={fileInputRef} name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
       <button type="button" onClick={UploadExample}>Upload file</button>
 
-      </div>
+      </div> */}
+
+      <UploadExample/>
 
       <div className="p-4">
       <label htmlFor="language" className="block font-semibold mb-2">Select Language:</label>
