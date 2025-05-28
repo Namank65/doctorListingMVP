@@ -12,14 +12,9 @@ export function UserProvider({ children }) {
   const [modeOfConsult, setModeOfConsult] = useState("");
   const [hosVisit, setHosVisit] = useState(false);
   const [facilityState, setFacilityState] = useState("");
+  const [ImageKitUploadResponce, setImageKitUploadResponce] = useState();
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-
-
-    const fileInputRef = useRef(null);
-    
-
-
 
 
   const doctorsData = async () => {
@@ -70,7 +65,8 @@ export function UserProvider({ children }) {
         setFacilityState,
         priceRange,
         setPriceRange,
-        fileInputRef
+        ImageKitUploadResponce,
+        setImageKitUploadResponce
       }}
     >
       {children}

@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Context } from '../utils/context';
-import UploadExample  from '../utils/uploadAvatarImgKt';
+import ImageUploader  from '../utils/uploadAvatarImgKt';
 
 const AddDoctorForm = () => {
-  // const{fileInputRef} = Context();
+  // const{ImageKitUploadResponce} = Context();
   const [formData, setFormData] = useState({
     doctorName: '',
     experience: '',
@@ -53,6 +53,7 @@ const AddDoctorForm = () => {
         //     input.checked = false
         //   }
         // }
+        
       }
     } catch (error) {
       toast.error('Server error');
@@ -68,12 +69,12 @@ const AddDoctorForm = () => {
       <input name="hospitalName" className='border w-6/12 p-2  rounded' placeholder="Hospital Name" onChange={handleChange} required />
 
       {/* <div>
-      <input type='file' ref={fileInputRef} name="avatar" className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
+      <input className='border w-6/12 p-2  rounded' placeholder="Image URL (type Any String Here for now)" onChange={handleChange} required />
       <button type="button" onClick={UploadExample}>Upload file</button>
 
       </div> */}
 
-      <UploadExample/>
+      <ImageUploader onChangeHandler={handleChange}/>
 
       <div className="p-4">
       <label htmlFor="language" className="block font-semibold mb-2">Select Language:</label>

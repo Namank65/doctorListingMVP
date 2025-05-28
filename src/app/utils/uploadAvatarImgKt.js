@@ -3,23 +3,18 @@
 import {
     ImageKitAbortError,
     ImageKitInvalidRequestError,
-    ImageKitProvider,
     ImageKitServerError,
     ImageKitUploadNetworkError,
     upload,
 } from "@imagekit/next";
-import { useRef, useState } from "react";
+import {useRef} from "react";
+import { Context } from "./context";
 
-const UploadExample = () => {
-
-    const imageKitUrlEndpoint = process.env.IMAGE_KIT_URL_ENDPOINT
-
-    const [progress, setProgress] = useState(0);
-
+const ImageUploader = ({onChangeHandler}) => {
+    const {setImageKitUploadResponce, ImageKitUploadResponce} = Context()
     const fileInputRef = useRef(null);
 
     const abortController = new AbortController();
-
 
     const authenticator = async () => {
         try {
@@ -30,7 +25,7 @@ const UploadExample = () => {
             }
 
             const data = await response.json();
-            const { signature, expire, token, publicKey } = data;
+            const { signature, expire, token, publicKey} = data;
             return { signature, expire, token, publicKey };
         } catch (error) {
             console.error("Authentication error:", error);
@@ -65,14 +60,11 @@ const UploadExample = () => {
                 publicKey,
                 file,
                 fileName: file.name, 
-
-                onProgress: (event) => {
-                    setProgress((event.loaded / event.total) * 100);
-                },
-                // Abort signal to allow cancellation of the upload if needed.
                 abortSignal: abortController.signal,
             });
-            console.log("Upload response:", uploadResponse);
+            setImageKitUploadResponce(uploadResponse)
+            console.log(ImageKitUploadResponce);
+
         } catch (error) {
             if (error instanceof ImageKitAbortError) {
                 console.error("Upload aborted:", error.reason);
@@ -90,16 +82,12 @@ const UploadExample = () => {
 
     return (
         <>
-        <ImageKitProvider urlEndpoint={imageKitUrlEndpoint}>
-            <input type="file" ref={fileInputRef} />
+            <input type="file" name="avatar" onChange={onChangeHandler} ref={fileInputRef} />
             <button type="button" onClick={handleUpload}>
                 Upload file
             </button>
-            <br />
-            Upload progress: <progress value={progress} max={100}></progress>
-            </ImageKitProvider>
         </>
     );
 };
 
-export default UploadExample;
+export default ImageUploader;
