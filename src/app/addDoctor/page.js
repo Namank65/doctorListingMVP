@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Context } from '../utils/context';
-import  UploadExample  from '../utils/uploadAvatarImgKt';
+import UploadExample  from '../utils/uploadAvatarImgKt';
 
 const AddDoctorForm = () => {
   // const{fileInputRef} = Context();

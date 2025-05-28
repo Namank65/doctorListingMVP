@@ -3,6 +3,7 @@
 import {
     ImageKitAbortError,
     ImageKitInvalidRequestError,
+    ImageKitProvider,
     ImageKitServerError,
     ImageKitUploadNetworkError,
     upload,
@@ -10,6 +11,8 @@ import {
 import { useRef, useState } from "react";
 
 const UploadExample = () => {
+
+    const imageKitUrlEndpoint = process.env.IMAGE_KIT_URL_ENDPOINT
 
     const [progress, setProgress] = useState(0);
 
@@ -87,12 +90,14 @@ const UploadExample = () => {
 
     return (
         <>
+        <ImageKitProvider urlEndpoint={imageKitUrlEndpoint}>
             <input type="file" ref={fileInputRef} />
             <button type="button" onClick={handleUpload}>
                 Upload file
             </button>
             <br />
             Upload progress: <progress value={progress} max={100}></progress>
+            </ImageKitProvider>
         </>
     );
 };
