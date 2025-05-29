@@ -7,7 +7,7 @@ export default function Doctor({ doctor }) {
       <div className="flex ">
         <Image
           className="pr-5 w-fit"
-          src="/apollo247.svg"
+          src={"/apollo247.svg"}
           alt="Description"
           width={60}
           height={46}

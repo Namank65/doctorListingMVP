@@ -11,7 +11,7 @@ import {useRef} from "react";
 import { Context } from "./context";
 
 const ImageUploader = ({onChangeHandler}) => {
-    const {setImageKitUploadResponce, ImageKitUploadResponce} = Context()
+    const {setImageKitUploadResponce, imageKitUploadResponce} = Context()
     const fileInputRef = useRef(null);
 
     const abortController = new AbortController();
@@ -62,8 +62,8 @@ const ImageUploader = ({onChangeHandler}) => {
                 fileName: file.name, 
                 abortSignal: abortController.signal,
             });
-            setImageKitUploadResponce(uploadResponse)
-            console.log(ImageKitUploadResponce);
+            setImageKitUploadResponce(uploadResponse?.url)
+            console.log(imageKitUploadResponce);
 
         } catch (error) {
             if (error instanceof ImageKitAbortError) {

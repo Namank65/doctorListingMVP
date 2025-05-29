@@ -12,7 +12,7 @@ export function UserProvider({ children }) {
   const [modeOfConsult, setModeOfConsult] = useState("");
   const [hosVisit, setHosVisit] = useState(false);
   const [facilityState, setFacilityState] = useState("");
-  const [ImageKitUploadResponce, setImageKitUploadResponce] = useState();
+  const [imageKitUploadResponce, setImageKitUploadResponce] = useState("");
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
 
@@ -65,7 +65,7 @@ export function UserProvider({ children }) {
         setFacilityState,
         priceRange,
         setPriceRange,
-        ImageKitUploadResponce,
+        imageKitUploadResponce,
         setImageKitUploadResponce
       }}
     >

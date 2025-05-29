@@ -6,7 +6,7 @@ import { Context } from '../utils/context';
 import ImageUploader  from '../utils/uploadAvatarImgKt';
 
 const AddDoctorForm = () => {
-  // const{ImageKitUploadResponce} = Context();
+  const{imageKitUploadResponce} = Context();
   const [formData, setFormData] = useState({
     doctorName: '',
     experience: '',
@@ -22,13 +22,38 @@ const AddDoctorForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      ...formData, [name]: type === 'checkbox' ? checked : value
     });
   };
 
+  const imageKitHandle = (e) => {
+    console.log(imageKitUploadResponce);
+    console.log("hiiiiii Babe");
+    // setFormData((prev) => console.log(...prev)
+    // );
+    setFormData((prev) => ({
+      ...prev,
+       avatar: imageKitUploadResponce
+    }));
+    
+  }
+  // const handleChange = (e) => {
+  //   const { name, value, type, checked } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: type === 'checkbox' ? checked : value,
+  //   });
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+    console.log(imageKitUploadResponce);
+        setFormData((prev) => ({
+      ...prev,
+       avatar: imageKitUploadResponce
+    }));
+    
     
     try {
       const res = await fetch('/api/doctor', {
@@ -43,6 +68,8 @@ const AddDoctorForm = () => {
         toast.error(data.error || 'Something went wrong');
       } else {
         toast.success('Doctor added successfully');
+        console.log(imageKitUploadResponce);
+        
 
         // for (let i = 0; i < e.target.length; i++) {
         //   let input = e.target[i]
@@ -74,7 +101,7 @@ const AddDoctorForm = () => {
 
       </div> */}
 
-      <ImageUploader onChangeHandler={handleChange}/>
+      <ImageUploader onChangeHandler={imageKitHandle}/>
 
       <div className="p-4">
       <label htmlFor="language" className="block font-semibold mb-2">Select Language:</label>
