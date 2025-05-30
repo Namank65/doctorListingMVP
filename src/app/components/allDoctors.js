@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { Image } from "@imagekit/next";
 
 export default function Doctor({ doctor }) {
   return (
@@ -7,7 +7,8 @@ export default function Doctor({ doctor }) {
       <div className="flex ">
         <Image
           className="pr-5 w-fit"
-          src={"/apollo247.svg"}
+          urlEndpoint={"https://ik.imagekit.io/8ehypq0zz"}
+          src={doctor?.avatar || "/public/apollo247.png"}
           alt="Description"
           width={60}
           height={46}
