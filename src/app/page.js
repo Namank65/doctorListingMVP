@@ -10,7 +10,7 @@ export default function Home() {
   
   return (
     <div className="flex justify-center w-fit px-11 flex-col overflow-y-scroll gap-5 ">
-      <h1 className="font-bold text-2xl py-8">
+      <h1 className="font-bold text-xl md:text-2xl py-8">
         Consult General Physicians Online - Internal Medicine Specialists
       </h1>
       <Link href={"/addDoctor"}>

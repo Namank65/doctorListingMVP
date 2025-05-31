@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
 const UserContext = createContext();
@@ -16,16 +16,24 @@ export function UserProvider({ children }) {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
 
-
   const doctorsData = async () => {
     try {
       let baseUrl = `/api/filterdDoctor?page=${page}`;
       if (experienceRange.min > 0 && experienceRange.max > 0)
         baseUrl += `&minExperience=${experienceRange?.min}&maxExperience=${experienceRange?.max}`;
       if (language) baseUrl += `&language=${language}`;
-      if (modeOfConsult) baseUrl += `&${modeOfConsult === "hosVisit" ? `hospitalVisit=${hosVisit}` : `onlineConsult=${hosVisit}`}`;
-      if (facilityState) baseUrl += `&${facilityState === "apolloHos" ? `apolloHospital=true` : ``}`;
-      if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult) baseUrl += `&minFees=${priceRange?.min}&maxFees=${priceRange?.max}`;
+      if (modeOfConsult)
+        baseUrl += `&${
+          modeOfConsult === "hosVisit"
+            ? `hospitalVisit=${hosVisit}`
+            : `onlineConsult=${hosVisit}`
+        }`;
+      if (facilityState)
+        baseUrl += `&${
+          facilityState === "apolloHos" ? `apolloHospital=true` : ``
+        }`;
+      if (priceRange.max > 0 && priceRange.min > 0 && !modeOfConsult)
+        baseUrl += `&minFees=${priceRange?.min}&maxFees=${priceRange?.max}`;
 
       let res = await fetch(baseUrl);
       const data = await res.json();
@@ -36,7 +44,6 @@ export function UserProvider({ children }) {
         toast.success("All Doctors Data Fetched Successfully");
         setAllDoctorsData(data?.allDoctors);
         setTotalPage(data?.totalPage);
-        console.log(data);
       }
     } catch (error) {
       toast.error("Server error");
@@ -66,7 +73,7 @@ export function UserProvider({ children }) {
         priceRange,
         setPriceRange,
         imageKitUploadResponce,
-        setImageKitUploadResponce
+        setImageKitUploadResponce,
       }}
     >
       {children}

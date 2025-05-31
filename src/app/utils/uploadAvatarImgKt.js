@@ -1,5 +1,5 @@
 "use client";
-
+import { MdFileUpload } from "react-icons/md";
 import {
   ImageKitAbortError,
   ImageKitInvalidRequestError,
@@ -11,7 +11,7 @@ import { useRef } from "react";
 import { Context } from "./context";
 
 const ImageUploader = () => {
-  const { setImageKitUploadResponce, imageKitUploadResponce } = Context();
+  const { setImageKitUploadResponce } = Context();
   const fileInputRef = useRef(null);
 
   const abortController = new AbortController();
@@ -63,8 +63,7 @@ const ImageUploader = () => {
         fileName: file.name,
         abortSignal: abortController.signal,
       });
-      setImageKitUploadResponce(uploadResponse?.url)
-
+      setImageKitUploadResponce(uploadResponse?.url);
     } catch (error) {
       if (error instanceof ImageKitAbortError) {
         console.error("Upload aborted:", error.reason);
@@ -81,12 +80,15 @@ const ImageUploader = () => {
   };
 
   return (
-    <>
-      <input type="file" name="avatar" ref={fileInputRef} />
-      <button type="button" onClick={handleUpload}>
-        Upload file
-      </button>
-    </>
+    <div className="flex gap-5">
+      <div className="flex border items-center rounded-sm hover:scale-90">
+        <MdFileUpload className="text-2xl" />
+        <input type="file" name="avatar" ref={fileInputRef} className="cursor-pointer"/>
+      </div>
+        <button type="button" onClick={handleUpload} className="border p-2 rounded-sm text-white hover:bg-[#304a52] bg-[#106C89]">
+          Upload file
+        </button>
+    </div>
   );
 };
 

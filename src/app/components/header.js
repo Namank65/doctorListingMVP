@@ -8,17 +8,18 @@ import Image from "next/image";
 const header = () => {
   return (
     <div className="bg-gray-100 z-10 sticky top-0 shadow-xl">
-      <div className="flex flex-row justify-between px-10 md:px-40 py-2">
+      <div className="flex flex-row justify-between px-2  md:px-32 py-2">
         <div className="flex flex-row">
           <Image
+          className="w-12 md:w-16 "
             src="/apollo247.svg"
             alt="Description"
             width={60}
             height={46}
           />
-          <div className="flex flex-row items-center px-6 text-sm md:text-l">
+          <div className="flex flex-row text-xs items-center px-1 md:px-6 md:text-sm md:text-l">
             <GrLocation className="text-2xl"/>
-            <div className="px-2">
+            <div className="  md:px-2">
               <p className="text-xs">Select location</p>
               <p className="flex items-center font-medium ">Select Address <IoChevronDown/> </p>
             </div>
@@ -33,7 +34,7 @@ const header = () => {
           />
         </div>
 
-        <div className="flex items-center border rounded-xl px-4 font-medium text-[#106C89] gap-3">
+        <div className="flex items-center md:border rounded-xl md:px-4 font-medium text-[#106C89] gap-3">
         <button className="cursor-pointer md:block hidden">
           Login
         </button>

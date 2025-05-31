@@ -26,6 +26,8 @@ const AddDoctorForm = () => {
         avatar: imageKitUploadResponce,
       }));
     }
+    if(imageKitUploadResponce) toast.success("Avatar Uploaded Successfully ")
+
   }, [imageKitUploadResponce]);
 
   const handleChange = (e) => {
@@ -38,6 +40,8 @@ const AddDoctorForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // if(!imageKitUploadResponce) toast.error("Please Upload Your Avatar First")
 
     try {
       const res = await fetch("/api/doctor", {
@@ -54,12 +58,12 @@ const AddDoctorForm = () => {
         toast.success("Doctor added successfully");
 
         for (let i = 0; i < e.target.length; i++) {
-          let input = e.target[i]
+          let input = e.target[i];
           if (input) {
-            input.value = ''
+            input.value = "";
           }
-           if(input.type === "checkbox"){
-            input.checked = false
+          if (input.type === "checkbox") {
+            input.checked = false;
           }
         }
       }
@@ -104,7 +108,7 @@ const AddDoctorForm = () => {
         required
       />
       <ImageUploader />
-      <div className="p-4">
+      <div className="p-4 gap-4 flex items-center">
         <label htmlFor="language" className="block font-semibold mb-2">
           Select Language:
         </label>
