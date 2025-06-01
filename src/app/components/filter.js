@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Context } from "../utils/context";
+import { RxCross1 } from "react-icons/rx";
 
 export default function SideBar() {
   const [languageState, setLanguageState] = useState("");
@@ -20,7 +21,8 @@ export default function SideBar() {
     priceRange,
     setPriceRange,
     page,
-    mobileFilterState
+    mobileFilterState,
+    setMobileFilterState,
   } = Context();
 
   const handleCheckboxChange = (e) => {
@@ -147,18 +149,23 @@ export default function SideBar() {
   ]);
 
   return (
-    // <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
-    <div className={` bg-gray-100 text-black md:flex md:overflow-y-scroll font-bold w-full md:w-1/4 absolute md:relative h-screen px-11 ${mobileFilterState? `block`: `hidden`}`}>
-      {/* <div className="p-3 w-fit sm:block hidden"> */}
-      <div className="p-3 w-fit ">
-        <div className="flex gap-20 py-3">
-          <h1 className="text-lg">Filters</h1>
-          <button
-            onClick={() => doctorsData()}
-            className="text-[#106C89] cursor-pointer hover:text-amber-500"
-          >
-            Clear all
-          </button>
+    <div
+      className={` bg-gray-100 text-black md:flex md:overflow-y-scroll font-bold w-full md:w-1/4 absolute md:relative h-screen px-11 ${
+        mobileFilterState ? `block` : `hidden`
+      }`}
+    >
+      <div className="p-3 w-full  ">
+        <div className="flex gap-10 py-3 justify-between items-center">
+          <div className="flex gap-20">
+            <h1 className="text-lg">Filters</h1>
+            <button
+              onClick={() => doctorsData()}
+              className="text-[#106C89] cursor-pointer hover:text-amber-500"
+            >
+              Clear all
+            </button>
+          </div>
+          <RxCross1 onClick={(prev) => setMobileFilterState(prev => !prev)} className="cursor-pointer md:hidden" />
         </div>
         <div>
           <hr className="h-1 w-full opacity-20 rounded-2xl pb-5" />
