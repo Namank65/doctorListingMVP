@@ -10,6 +10,8 @@ export function UserProvider({ children }) {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [language, setLanguage] = useState("");
   const [modeOfConsult, setModeOfConsult] = useState("");
+  const [mobileFilterState, setMobileFilterState] = useState(false);
+  
   const [hosVisit, setHosVisit] = useState(false);
   const [facilityState, setFacilityState] = useState("");
   const [imageKitUploadResponce, setImageKitUploadResponce] = useState("");
@@ -74,6 +76,8 @@ export function UserProvider({ children }) {
         setPriceRange,
         imageKitUploadResponce,
         setImageKitUploadResponce,
+        mobileFilterState,
+        setMobileFilterState
       }}
     >
       {children}

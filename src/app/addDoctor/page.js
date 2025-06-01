@@ -26,8 +26,7 @@ const AddDoctorForm = () => {
         avatar: imageKitUploadResponce,
       }));
     }
-    if(imageKitUploadResponce) toast.success("Avatar Uploaded Successfully ")
-
+    if (imageKitUploadResponce) toast.success("Avatar Uploaded Successfully");
   }, [imageKitUploadResponce]);
 
   const handleChange = (e) => {
@@ -40,8 +39,6 @@ const AddDoctorForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if(!imageKitUploadResponce) toast.error("Please Upload Your Avatar First")
 
     try {
       const res = await fetch("/api/doctor", {

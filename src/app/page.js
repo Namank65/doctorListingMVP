@@ -4,20 +4,23 @@ import Doctor from "./components/allDoctors";
 import { Context } from "./utils/context";
 
 export default function Home() {
-  const {allDoctorsData, setPage, page, totalPage} = Context();
+  const {allDoctorsData, setPage, page, totalPage, setMobileFilterState, mobileFilterState} = Context();
   const isPrev = page > 1
   const isnext = page < totalPage
   
   return (
-    <div className="flex justify-center w-fit px-11 flex-col overflow-y-scroll gap-5 ">
+    <div className={`md:flex justify-center w-fit px-11 flex-col overflow-y-scroll gap-5 ${mobileFilterState? `hidden`: `block`}`}>
       <h1 className="font-bold text-xl md:text-2xl py-8">
         Consult General Physicians Online - Internal Medicine Specialists
       </h1>
       <Link href={"/addDoctor"}>
-        <button className="border cursor-pointer p-1 rounded-xl text-[#106C89] font-bold hover:text-[#3b575f]">
+        <button className="border cursor-pointer p-2 rounded-xl text-[#106C89] font-bold hover:text-[#3b575f]">
           Add New Doctor+
         </button>
       </Link>
+        <button className="border md:hidden ml-2 cursor-pointer p-2 rounded-xl text-[#106C89] font-bold hover:text-[#3b575f]" onClick={(prev) => setMobileFilterState(prev => !prev)}>
+          Filters
+        </button>
       {allDoctorsData?.map((e) => (
         <Doctor key={e._id} doctor={e} />
       ))}

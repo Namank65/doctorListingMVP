@@ -20,6 +20,7 @@ export default function SideBar() {
     priceRange,
     setPriceRange,
     page,
+    mobileFilterState
   } = Context();
 
   const handleCheckboxChange = (e) => {
@@ -146,8 +147,10 @@ export default function SideBar() {
   ]);
 
   return (
-    <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
-      <div className="p-3 w-fit sm:block hidden">
+    // <div className=" bg-gray-100 text-black md:flex hidden overflow-y-scroll justify-center font-bold w-1/4 relative sm:h-screen px-11">
+    <div className={` bg-gray-100 text-black md:flex md:overflow-y-scroll font-bold w-full md:w-1/4 absolute md:relative h-screen px-11 ${mobileFilterState? `block`: `hidden`}`}>
+      {/* <div className="p-3 w-fit sm:block hidden"> */}
+      <div className="p-3 w-fit ">
         <div className="flex gap-20 py-3">
           <h1 className="text-lg">Filters</h1>
           <button

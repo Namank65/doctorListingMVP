@@ -80,14 +80,25 @@ const ImageUploader = () => {
   };
 
   return (
-    <div className="flex gap-5">
-      <div className="flex border items-center rounded-sm hover:scale-90">
-        <MdFileUpload className="text-2xl" />
-        <input type="file" name="avatar" ref={fileInputRef} className="cursor-pointer"/>
-      </div>
-        <button type="button" onClick={handleUpload} className="border p-2 rounded-sm text-white hover:bg-[#304a52] bg-[#106C89]">
+    <div className="flex">
+      <div className=" flex flex-col md:flex-row gap-5">
+        <div className="flex border items-center rounded-sm hover:scale-90 ">
+          <MdFileUpload className="text-2xl" />
+          <input
+            type="file"
+            name="avatar"
+            ref={fileInputRef}
+            className="cursor-pointer"
+          />
+        </div>
+        <button
+          type="button"
+          onClick={handleUpload}
+          className="border p-2 rounded-sm text-white hover:bg-[#304a52] bg-[#106C89]"
+        >
           Upload file
         </button>
+      </div>
     </div>
   );
 };
