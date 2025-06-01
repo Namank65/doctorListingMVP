@@ -18,7 +18,7 @@ export default function Home() {
           Add New Doctor+
         </button>
       </Link>
-        <button className="border md:hidden ml-2 cursor-pointer p-2 rounded-xl text-[#106C89] font-bold hover:text-[#3b575f]" onClick={(prev) => setMobileFilterState(prev => !prev)}>
+        <button className="border md:hidden ml-2 cursor-pointer p-2 rounded-xl text-[#106C89] font-bold hover:text-[#3b575f]" onClick={() => setMobileFilterState(prev => !prev)}>
           Filters
         </button>
       {allDoctorsData?.map((e) => (

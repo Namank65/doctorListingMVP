@@ -165,7 +165,7 @@ export default function SideBar() {
               Clear all
             </button>
           </div>
-          <RxCross1 onClick={(prev) => setMobileFilterState(prev => !prev)} className="cursor-pointer md:hidden" />
+          <RxCross1 onClick={() => setMobileFilterState(prev => !prev)} className="cursor-pointer md:hidden" />
         </div>
         <div>
           <hr className="h-1 w-full opacity-20 rounded-2xl pb-5" />
